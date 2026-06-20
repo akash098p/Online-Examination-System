@@ -14,6 +14,8 @@ It provides real-time analytics, automated grading, and seamless exam management
 
 🌐 Live Demo
 
+![Academix](public/images/homepage.png)
+
 🔗 https://academix.free.je/
 
 
