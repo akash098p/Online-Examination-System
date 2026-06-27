@@ -20,6 +20,10 @@ Academix is a modern online examination system built with Laravel, Tailwind CSS,
 
 ## 🌐 Live Demo
 
+<p align="center">
+  <img src="media/home page.gif" width="100%">
+</p>
+
 ### Create New Account or Log in to the Existing Account
 
 <p align="center">
