@@ -245,10 +245,10 @@ Akash Pramanik
 
 For questions or support: `akashpramanik422@gmail.com`
 
-<p align="center"><a href="mailto:akashpramanik422@gmail.com">
+<a href="mailto:akashpramanik422@gmail.com">
 <img src="https://skillicons.dev/icons?i=gmail" height="32"/>
 </a>
-&nbsp;<b>Gmail</b> 
+&nbsp;<b>`akashpramanik422@gmail.com`</b> 
 
 <a href="https://instagram.com/akash.098p">
 <img src="https://skillicons.dev/icons?i=instagram" height="32"/>
