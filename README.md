@@ -254,3 +254,4 @@ For questions or support:
 <img src="https://skillicons.dev/icons?i=instagram" height="32"/>
 </a>
 &nbsp;<b>akash.098p</b>
+<img src="https://img.shields.io/badge/Instagram?style=for-the-badge&logo=akash.098p&logoColor=white"/>
