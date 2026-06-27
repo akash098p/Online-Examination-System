@@ -32,6 +32,13 @@ Visit the URL : https://academix.free.je
 <p align="center">
   <img src="media/admin.jpg" width="100%">
 </p>
+
+<h2>Dashboard Preview</h2>
+
+<p align="center">
+  <img src="media/admin.jpg" width="48%">
+  <img src="media/student.jpg" width="48%">
+</p>
 ---
 
 ## 🔥 Key Benefits
