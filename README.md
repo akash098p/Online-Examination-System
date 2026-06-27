@@ -26,6 +26,12 @@ Visit the URL : https://academix.free.je
 <p align="center">
   <img src="media/auth.jpg" width="100%">
 </p>
+
+
+
+<p align="center">
+  <img src="media/admin.jpg" width="100%">
+</p>
 ---
 
 ## 🔥 Key Benefits
