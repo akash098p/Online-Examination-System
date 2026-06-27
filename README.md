@@ -284,30 +284,6 @@ If you want to extend Academix, feel free to add:
 
 ## 📬 Contact
 
-Akash Pramanik
-
-For questions or support: <a href="https://instagram.com/akash.098p" target="_blank">
-  <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"/>
-</a>
-
-<a href="mailto:YOUR_EMAIL@gmail.com">
-  <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
-</a>
-
-<h3>Akash Pramanik</h3>
-
-<p>
-  <strong>For questions or support:</strong>
-
-  <a href="https://instagram.com/akash.098p" target="_blank">
-    <img src="https://img.shields.io/badge/@akash.098p-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
-  </a>
-
-  <a href="mailto:your_email@gmail.com">
-    <img src="https://img.shields.io/badge/your_email@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
-  </a>
-</p>
-
 <h3>Akash Pramanik</h3>
 
 <p>
@@ -326,32 +302,6 @@ For questions or support: <a href="https://instagram.com/akash.098p" target="_bl
 
 <p align="center">
   <strong>For questions or support:</strong>
-
-  <a href="https://instagram.com/akash.098p" target="_blank">
-    <img src="https://img.shields.io/badge/@akash.098p-E4405F?style=for-the-badge&logo=instagram&logoColor=white"/>
-  </a>
-
-  <a href="mailto:akashpramanik098@gmail.com">
-    <img src="https://img.shields.io/badge/akashpramanik098%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
-  </a>
-</p>
-
-<p>
-  <strong>For questions or support:</strong>
-
-  <a href="https://instagram.com/akash.098p">
-    <img src="https://cdn.simpleicons.org/instagram/E4405F" width="20" alt="Instagram"/>
-    akash.098p
-  </a>
-
-  &nbsp;|&nbsp;
-
-  <a href="mailto:akashpramanik098@gmail.com">
-    <img src="https://cdn.simpleicons.org/gmail/EA4335" width="20" alt="Gmail"/>
-    akashpramanik098@gmail.com
-  </a>
-</p>
-
 <a href="https://instagram.com/akash.098p" target="_blank">
   <img src="https://img.shields.io/badge/instagram-akash.098p-E4405F?style=flat&logo=instagram&logoColor=white"/>
 </a>
@@ -359,3 +309,4 @@ For questions or support: <a href="https://instagram.com/akash.098p" target="_bl
 <a href="mailto:akashpramanik098@gmail.com">
   <img src="https://img.shields.io/badge/gmail-akashpramanik098%40gmail.com-D14836?style=flat&logo=gmail&logoColor=white"/>
 </a>
+</p>
