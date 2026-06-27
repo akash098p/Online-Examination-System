@@ -28,13 +28,28 @@ Visit the URL : https://academix.free.je
 </p>
 
 
+### Admin Panel
 
 <p align="center">
-  <img src="media/admin.jpg" width="48%">
-  <img src="media/student.jpg" width="48%">
+  <img src="media/admin dashboard.png" width="48%">
+  <img src="media/admin student management.png" width="48%">
 <br>
-  <img src="media/admin.jpg" width="48%">
-  <img src="media/student.jpg" width="48%">
+  <img src="media/admin manage exam.png" width="48%">
+  <img src="media/admin analysis.png" width="48%">
+<br>
+<img src="media/admin result.png" width="48%">
+  <img src="media/admin violation.png" width="48%">
+</p>
+### Student Panel
+<p align="center">
+  <img src="media/student dashboard.png" width="48%">
+  <img src="media/student profile.png" width="48%">
+<br>
+  <img src="media/student exam.png" width="48%">
+  <img src="media/student result.png" width="48%">
+<br>
+<img src="media/student result page.png" width="48%">
+  <img src="media/student ai chat.png" width="48%">
 </p>
 ---
 
