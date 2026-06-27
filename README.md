@@ -22,7 +22,7 @@ Academix is a modern online examination system built with Laravel, Tailwind CSS,
 
 ### Guest Landing Page
 <p align="center">
-  <img src="media/home page.gif" width="50%">
+  <img src="media/home page.gif" width="90%">
 </p>
 
 ### Create New Account or Log in to the Existing Account
@@ -58,7 +58,7 @@ Academix is a modern online examination system built with Laravel, Tailwind CSS,
   <img src="media/student ai chat.png" width="48%">
 </p>
 
-Visit the URL : https://academix.free.je
+- Visit the URL : https://academix.free.je
 ---
 
 ## 🔥 Key Benefits
