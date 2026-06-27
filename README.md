@@ -87,8 +87,8 @@ Academix is a modern online examination system built with Laravel, Tailwind CSS,
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-org/online-exam-system.git
-cd online-exam-system
+git clone https://github.com/akash098p/Online-Examination-System.git
+cd Online-Examination-System
 ```
 
 ### 2. Install PHP dependencies
@@ -243,4 +243,14 @@ If you want to extend Academix, feel free to add:
 
 Akash Pramanik
 
-For questions or support: `academix.edutech@gmail.com`
+For questions or support: `akashpramanik422@gmail.com`
+
+<p align="center"><a href="mailto:akashpramanik422@gmail.com">
+<img src="https://skillicons.dev/icons?i=gmail" height="32"/>
+</a>
+&nbsp;<b>Gmail</b> 
+
+<a href="https://instagram.com/akash.098p">
+<img src="https://skillicons.dev/icons?i=instagram" height="32"/>
+</a>
+&nbsp;<b>akash098p</b>
