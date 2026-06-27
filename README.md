@@ -18,6 +18,12 @@ Academix is a modern online examination system built with Laravel, Tailwind CSS,
 
 ---
 
+## 🌐 Live Demo
+
+Visit the URL : https://academix.free.je
+
+---
+
 ## 🔥 Key Benefits
 
 - Faster exam preparation and delivery for admins
