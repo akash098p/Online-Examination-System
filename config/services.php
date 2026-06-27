@@ -35,4 +35,20 @@ return [
         ],
     ],
 
+    'gemini' => [
+        'api_key' => env('GEMINI_API_KEY'),
+        'model' => env('GEMINI_MODEL', 'gemini-2.5-flash'),
+        'cache_minutes' => (int) env('AI_CACHE_MINUTES', 720),
+        'analytics_cache_minutes' => (int) env('AI_ANALYTICS_CACHE_MINUTES', 60),
+        'rate_limit_per_hour' => (int) env('AI_RATE_LIMIT_PER_HOUR', 10),
+    ],
+
+    'cloudinary' => [
+        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+        'api_key' => env('CLOUDINARY_API_KEY'),
+        'api_secret' => env('CLOUDINARY_API_SECRET'),
+        'profile_folder' => env('CLOUDINARY_PROFILE_FOLDER', 'academix/profile-pictures'),
+        'violation_folder' => env('CLOUDINARY_VIOLATION_FOLDER', 'academix/violations'),
+    ],
+
 ];

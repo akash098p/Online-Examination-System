@@ -6,9 +6,11 @@
             'email' => ['label' => 'email', 'value' => $user->email],
             'registration_no' => ['label' => 'registration number', 'value' => $user->registration_no],
             'college_name' => ['label' => 'college name', 'value' => $user->college_name],
+            'department' => ['label' => 'department', 'value' => $user->department],
             'semester' => ['label' => 'semester', 'value' => $user->semester],
             'phone' => ['label' => 'phone number', 'value' => $user->phone],
             'sex' => ['label' => 'sex', 'value' => $user->sex],
+            'date_of_birth' => ['label' => 'date of birth', 'value' => $user->date_of_birth],
             'profile_photo' => ['label' => 'profile photo', 'value' => $user->profile_photo],
         ]);
         $profileChecks = $profileFields->pluck('value');
@@ -38,6 +40,16 @@
                             <h1 class="max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-4xl hero-title">
                                 Manage your academic identity with a clean, professional profile experience.
                             </h1>
+
+                            <div class="sm:hidden">
+                                <button
+                                    type="button"
+                                    id="heroEditBtn"
+                                    class="inline-flex items-center justify-center rounded-xl bg-cyan-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400"
+                                >
+                                    Edit Profile
+                                </button>
+                            </div>
                         </div>
 
                         <div class="grid gap-4 sm:grid-cols-3">
@@ -54,13 +66,27 @@
                                     @endif
                                 </p>
                             </div>
-                            <div class="profile-stat profile-reveal profile-reveal-delay-3">
-                                <span class="profile-stat-label profile-stat-label-soft">Account email</span>
-                                <strong class="profile-stat-value profile-stat-value-compact break-all profile-stat-value-highlight">{{ $user->email }}</strong>
-                            </div>
-                            <div class="profile-stat profile-reveal profile-reveal-delay-4">
-                                <span class="profile-stat-label profile-stat-label-soft">Member since</span>
-                                <strong class="profile-stat-value profile-stat-value-compact profile-stat-value-highlight">{{ $user->created_at->format('d M Y') }}</strong>
+
+                            <div class="grid grid-cols-2 gap-4 sm:col-span-2">
+                                <div class="profile-stat profile-reveal profile-reveal-delay-3">
+                                    <span class="profile-stat-label profile-stat-label-soft">Account email</span>
+                                    <strong class="profile-stat-value profile-stat-value-compact break-all profile-stat-value-highlight">{{ $user->email }}</strong>
+                                </div>
+
+                                <div class="profile-stat profile-reveal profile-reveal-delay-4">
+                                    <span class="profile-stat-label profile-stat-label-soft">Member since</span>
+                                    <strong class="profile-stat-value profile-stat-value-compact profile-stat-value-highlight">{{ $user->created_at->format('d M Y') }}</strong>
+                                </div>
+
+                                <div class="profile-stat profile-reveal profile-reveal-delay-3">
+                                    <span class="profile-stat-label profile-stat-label-soft">Contact</span>
+                                    <strong class="profile-stat-value profile-stat-value-compact profile-stat-value-highlight">{{ $user->phone ?: 'Not set' }}</strong>
+                                </div>
+
+                                <div class="profile-stat profile-reveal profile-reveal-delay-4">
+                                    <span class="profile-stat-label profile-stat-label-soft">D.O.B</span>
+                                    <strong class="profile-stat-value profile-stat-value-compact profile-stat-value-highlight">{{ optional($user->date_of_birth)->format('d M Y') ?: 'Not set' }}</strong>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -75,27 +101,28 @@
 
                             <div class="min-w-0 space-y-1">
                                 <p class="text-xs font-semibold uppercase tracking-[0.24em] text-amber-100/80">Student identity</p>
-                                <h2 class="truncate text-2xl font-semibold text-white">{{ $user->name }}</h2>
-                                <p class="text-sm text-slate-200/90">{{ $user->registration_no ?: 'Registration number not added yet' }}</p>
+                                <h2 class="student-identity-name text-2xl font-semibold text-white">{{ $user->name }}</h2>
+                                <p class="text-sm text-slate-100">{{ $user->registration_no ?: 'Registration number not added yet' }}</p>
                             </div>
                         </div>
 
                         <div class="grid gap-3 sm:grid-cols-2">
-                            <div class="profile-mini-card">
-                                <span class="profile-mini-label">Semester</span>
-                                <span class="profile-mini-value">{{ $user->semester ?: 'Not set' }}</span>
-                            </div>
+                        
                             <div class="profile-mini-card">
                                 <span class="profile-mini-label">College</span>
                                 <span class="profile-mini-value">{{ $user->college_name ?: 'Not set' }}</span>
                             </div>
                             <div class="profile-mini-card">
-                                <span class="profile-mini-label">Phone</span>
-                                <span class="profile-mini-value">{{ $user->phone ?: 'Not set' }}</span>
+                                <span class="profile-mini-label">Semester</span>
+                                <span class="profile-mini-value">{{ $user->semester ?: 'Not set' }}</span>
+                            </div>
+                            <div class="profile-mini-card">
+                                <span class="profile-mini-label">Department</span>
+                                <span class="profile-mini-value">{{ $user->department ?: 'Not set' }}</span>
                             </div>
                             <div class="profile-mini-card">
                                 <span class="profile-mini-label">Status</span>
-                                <span class="profile-mini-value text-emerald-300">Active</span>
+                                <span class="profile-mini-value text-emerald-200">Active</span>
                             </div>
                         </div>
                     </aside>
@@ -129,20 +156,20 @@
             position: relative;
             background:
                 linear-gradient(135deg, rgba(10, 16, 30, 0.78), rgba(15, 23, 42, 0.58)),
-                linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+                linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.04));
             backdrop-filter: blur(12px) saturate(125%);
             -webkit-backdrop-filter: blur(12px) saturate(125%);
             box-shadow:
                 inset 0 1px 0 rgba(255, 255, 255, 0.18),
                 inset 0 -1px 0 rgba(255, 255, 255, 0.06),
-                0 28px 70px rgba(2, 6, 23, 0.4);
+                0 28px 70px rgba(2, 6, 23, 0.45);
         }
 
         .profile-hero::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.08) 40%, transparent 58%);
+            background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.16) 40%, transparent 58%);
             transform: translateX(-120%);
             animation: profileHeroSweep 8s ease-in-out infinite;
             pointer-events: none;
@@ -152,15 +179,15 @@
         .profile-sidecard {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             background:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
-                rgba(15, 23, 42, 0.48);
+                linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06)),
+                rgba(15, 23, 42, 0.70);
             backdrop-filter: blur(10px) saturate(125%);
             -webkit-backdrop-filter: blur(10px) saturate(125%);
             box-shadow:
                 inset 0 1px 0 rgba(255, 255, 255, 0.18),
-                0 20px 50px rgba(2, 6, 23, 0.28);
+                0 20px 50px rgba(2, 6, 23, 0.38);
             border-radius: 24px;
         }
 
@@ -183,11 +210,11 @@
         .profile-stat,
         .profile-mini-card,
         .profile-tip {
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             background:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
-                rgba(15, 23, 42, 0.24);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+                linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06)),
+                rgba(15, 23, 42, 0.42);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
             border-radius: 20px;
             padding: 1rem;
             transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
@@ -297,10 +324,10 @@
         }
 
         .profile-panel-danger {
-            border-color: rgba(248, 113, 113, 0.18);
+            border-color: rgba(248, 113, 113, 0.28);
             background:
-                linear-gradient(180deg, rgba(127, 29, 29, 0.18), rgba(15, 23, 42, 0.52)),
-                rgba(15, 23, 42, 0.44);
+                linear-gradient(180deg, rgba(127, 29, 29, 0.28), rgba(15, 23, 42, 0.68)),
+                rgba(15, 23, 42, 0.62);
         }
 
         .profile-reveal {
@@ -404,6 +431,13 @@
 
             .profile-stat-value-ring {
                 font-size: 1.2rem;
+            }
+
+            .student-identity-name {
+                font-size: clamp(1.1rem, 5vw, 1.4rem);
+                line-height: 1.15;
+                white-space: normal;
+                overflow-wrap: anywhere;
             }
         }
     </style>

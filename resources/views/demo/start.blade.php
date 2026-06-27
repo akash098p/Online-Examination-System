@@ -15,7 +15,7 @@
     })->values();
 @endphp
 
-<div class="max-w-7xl mx-auto px-4 py-6 relative z-50">
+<div class="demo-exam-shell max-w-7xl mx-auto px-4 py-6 relative z-50">
     <div class="exam-shell">
         <div class="exam-header">
             <div>
@@ -23,10 +23,30 @@
                 <p class="text-sm text-gray-300">{{ $test['description'] }}</p>
             </div>
 
-            <div class="flex items-center gap-3">
-                <div class="timer-box">
-                    <div class="text-[11px] uppercase tracking-wide text-gray-300">Time Left</div>
-                    <div id="timer" class="text-lg font-mono text-red-300">00:00</div>
+            <div class="exam-actions">
+                <div id="timerBox" class="timer-box">
+                    <div class="timer-visual" aria-hidden="true">
+                        <svg viewBox="0 0 80 110" class="timer-hourglass" role="presentation">
+                            <g class="timer-frame">
+                                <rect x="18" y="6" width="44" height="12" rx="6"></rect>
+                                <rect x="18" y="92" width="44" height="12" rx="6"></rect>
+                                <path d="M24 17 C24 37, 34 37, 40 47 C46 37, 56 37, 56 17"></path>
+                                <path d="M24 93 C24 73, 34 73, 40 63 C46 73, 56 73, 56 93"></path>
+                            </g>
+                            <g class="timer-glass">
+                                <path d="M27 20 C27 35, 35 38, 40 46 C45 38, 53 35, 53 20 L27 20 Z" class="sand-top"></path>
+                                <path d="M27 90 C27 75, 35 72, 40 64 C45 72, 53 75, 53 90 L27 90 Z" class="sand-bottom"></path>
+                                <rect x="38" y="46" width="4" height="20" rx="2" class="sand-stream"></rect>
+                                <circle cx="40" cy="59" r="2.5" class="sand-dot sand-dot-one"></circle>
+                                <circle cx="36.5" cy="66" r="1.8" class="sand-dot sand-dot-two"></circle>
+                                <circle cx="43.5" cy="69" r="1.5" class="sand-dot sand-dot-three"></circle>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="timer-copy">
+                        <div class="text-[11px] uppercase tracking-wide text-gray-300">Time Left</div>
+                        <div id="timer" class="text-lg font-mono text-red-300">00:00</div>
+                    </div>
                 </div>
                 <button type="button" id="exitBtn" class="btn btn-exit">Exit</button>
             </div>
@@ -100,13 +120,270 @@
     flex-wrap: wrap;
 }
 
+.exam-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
 .timer-box {
-    min-width: 110px;
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    background: rgba(17, 24, 39, 0.45);
-    border-radius: 10px;
-    padding: 0.45rem 0.7rem;
+    min-width: 122px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.7));
+    border-radius: 14px;
+    padding: 0.36rem 0.55rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.45rem;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 10px 24px rgba(2, 6, 23, 0.28);
+}
+
+.timer-copy {
     text-align: right;
+    display: grid;
+    gap: 0.1rem;
+}
+
+.timer-visual {
+    width: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.timer-visual::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.28), rgba(251, 191, 36, 0));
+    filter: blur(3px);
+    opacity: 0.18;
+    pointer-events: none;
+    animation: hourglass-aura 7.2s ease-in-out infinite;
+}
+
+.timer-visual::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-left: 2px solid rgba(251, 191, 36, 0.38);
+    border-right: 2px solid rgba(251, 191, 36, 0.38);
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: 9999px;
+    opacity: 0.12;
+    pointer-events: none;
+    transform: scale(0.9) rotate(0deg);
+    animation: hourglass-orbit 7.2s ease-in-out infinite;
+}
+
+.timer-hourglass {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    filter: drop-shadow(0 3px 8px rgba(245, 158, 11, 0.22));
+    transform-origin: 50% 50%;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+    animation: hourglass-flip 7.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.timer-frame rect,
+.timer-frame path {
+    fill: none;
+    stroke: #9a5c15;
+    stroke-width: 4.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.timer-frame rect {
+    fill: #d2a464;
+}
+
+.sand-top,
+.sand-bottom,
+.sand-stream,
+.sand-dot {
+    fill: #ffb347;
+}
+
+#timer {
+    font-size: 0.92rem;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    text-shadow: 0 0 14px rgba(248, 113, 113, 0.16);
+}
+
+.timer-copy .text-\[11px\] {
+    font-size: 0.58rem;
+    letter-spacing: 0.11em;
+}
+
+.sand-top {
+    transform-origin: 50% 20%;
+    animation: sand-top-flow 7.2s linear infinite;
+}
+
+.sand-bottom {
+    transform-origin: 50% 90%;
+    animation: sand-bottom-fill 7.2s linear infinite;
+}
+
+.sand-stream {
+    transform-origin: 50% 46px;
+    animation: sand-stream-flow 7.2s linear infinite;
+}
+
+.sand-dot-one { animation: sand-dot-fall 1.6s linear infinite; }
+.sand-dot-two { animation: sand-dot-fall 1.6s linear infinite 0.28s; }
+.sand-dot-three { animation: sand-dot-fall 1.6s linear infinite 0.56s; }
+
+.timer-box.timer-warning {
+    border-color: rgba(251, 191, 36, 0.55);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 0 0 1px rgba(251, 191, 36, 0.1),
+        0 10px 24px rgba(251, 191, 36, 0.12);
+}
+
+.timer-box.timer-danger {
+    border-color: rgba(248, 113, 113, 0.72);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 0 0 1px rgba(248, 113, 113, 0.16),
+        0 10px 24px rgba(248, 113, 113, 0.16);
+}
+
+.timer-box.timer-danger .timer-hourglass {
+    animation: hourglass-flip 5.8s cubic-bezier(0.65, 0, 0.35, 1) infinite, danger-pulse 1.2s ease-in-out infinite;
+}
+
+.timer-box.timer-danger .timer-visual::before {
+    animation: hourglass-aura-danger 5.8s ease-in-out infinite;
+}
+
+.timer-box.timer-danger .timer-visual::after {
+    animation: hourglass-orbit-danger 5.8s ease-in-out infinite;
+}
+
+@keyframes hourglass-flip {
+    0%, 40% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.04); }
+    60%, 90% { transform: rotate(180deg) scale(1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes hourglass-aura {
+    0%, 40%, 60%, 90%, 100% { opacity: 0.12; transform: scale(0.88); }
+    50% { opacity: 0.28; transform: scale(1.04); }
+}
+
+@keyframes hourglass-aura-danger {
+    0%, 40%, 60%, 90%, 100% { opacity: 0.18; transform: scale(0.9); }
+    50% { opacity: 0.34; transform: scale(1.08); }
+}
+
+@keyframes hourglass-orbit {
+    0%, 40%, 60%, 90%, 100% { opacity: 0.08; transform: scale(0.9) rotate(0deg); }
+    50% { opacity: 0.22; transform: scale(1) rotate(180deg); }
+}
+
+@keyframes hourglass-orbit-danger {
+    0%, 40%, 60%, 90%, 100% { opacity: 0.1; transform: scale(0.92) rotate(0deg); }
+    50% { opacity: 0.28; transform: scale(1.02) rotate(180deg); }
+}
+
+@keyframes sand-top-flow {
+    0%, 8% { transform: scaleY(1); opacity: 1; }
+    42%, 48% { transform: scaleY(0.12); opacity: 0.22; }
+    50%, 58% { transform: scaleY(1); opacity: 1; }
+    92%, 100% { transform: scaleY(0.12); opacity: 0.22; }
+}
+
+@keyframes sand-bottom-fill {
+    0%, 8% { transform: scaleY(0.18); opacity: 0.5; }
+    42%, 48% { transform: scaleY(1); opacity: 1; }
+    50%, 58% { transform: scaleY(0.18); opacity: 0.5; }
+    92%, 100% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes sand-stream-flow {
+    0%, 8%, 50%, 58%, 100% { transform: scaleY(0); opacity: 0; }
+    12%, 42%, 62%, 92% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes sand-dot-fall {
+    0% { transform: translateY(-3px); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(10px); opacity: 0; }
+}
+
+@keyframes danger-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+
+@media (min-width: 640px) {
+    .timer-box {
+        min-width: 138px;
+        padding: 0.42rem 0.62rem;
+        gap: 0.55rem;
+    }
+
+    .timer-visual {
+        width: 32px;
+    }
+
+    #timer {
+        font-size: 1rem;
+    }
+
+    .timer-copy .text-\[11px\] {
+        font-size: 0.62rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .demo-exam-shell {
+        max-width: none;
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+        padding-top: 1rem;
+        padding-bottom: 1.25rem;
+    }
+
+    .exam-shell {
+        padding: 0.85rem;
+        border-radius: 14px;
+    }
+
+    .exam-header {
+        align-items: flex-start;
+    }
+
+    .exam-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .question-glass,
+    .side-glass {
+        padding: 0.85rem;
+    }
+
+    .palette-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.4rem;
+    }
 }
 
 .question-glass,
@@ -337,7 +614,7 @@ function renderQuestion() {
     document.getElementById('questionContainer').innerHTML = `
         <h3 class="text-xl font-semibold mb-4 text-white">${index + 1}. ${q.question_text}</h3>
         <div class="space-y-3">
-            ${q.options.map(o => `
+            ${q.options.map((o, optionIndex) => `
                 <label class="option-item flex items-center gap-3 p-3 border rounded ${
                     answers[q.id] == o.id ? 'bg-gray-100/20 border-blue-400' : 'border-gray-500/70'
                 }">
@@ -346,7 +623,7 @@ function renderQuestion() {
                            data-qid="${q.id}"
                            value="${o.id}"
                            ${answers[q.id] == o.id ? 'checked' : ''}>
-                    <span class="text-gray-100">${o.option_text}</span>
+                    <span class="text-gray-100"><strong class="mr-2">${String.fromCharCode(65 + optionIndex)})</strong>${o.option_text}</span>
                 </label>
             `).join('')}
         </div>
@@ -396,6 +673,9 @@ function updateTimer() {
         : `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 
     document.getElementById('timer').innerText = text;
+    const timerBox = document.getElementById('timerBox');
+    timerBox.classList.toggle('timer-warning', safe <= 300 && safe > 60);
+    timerBox.classList.toggle('timer-danger', safe <= 60);
 
     if (remainingSeconds <= 0) {
         autoSubmitExam();

@@ -35,7 +35,7 @@
 
     <div class="nav-actions">
         <a href="{{ route('login') }}" class="nav-btn bg-blue-600/70 text-black font-semibold hover:bg-blue-800/100 hover:text-white">Login</a>
-        <a href="{{ route('register') }}" class="nav-btn bg-orange-600/70 hover:bg-orange-700/90">Sign Up</a>
+        <a href="{{ route('register') }}" class="nav-btn bg-orange-600/70 hover:bg-orange-700/90 hidden sm:inline-flex">Sign Up</a>
     </div>
 </nav>
 

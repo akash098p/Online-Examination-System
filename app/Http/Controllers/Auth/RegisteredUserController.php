@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\WelcomeStudentNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,8 +31,10 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'college_name' => ['required','string','max:255'],
+            'department' => ['required', 'in:'.implode(',', config('academix.departments', []))],
+            'sex' => ['required', 'in:male,female'],
             'registration_no' => ['required','string','max:100'],
-            'semester' => ['required','in:1st,2nd,3rd,4th,5th,6th'],
+            'semester' => ['required', 'in:'.implode(',', config('academix.semesters', []))],
             'phone' => ['required','string','max:20'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -40,6 +43,8 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'college_name' => $request->college_name,
+            'department' => $request->department,
+            'sex' => strtolower($request->sex),
             'registration_no' => $request->registration_no,
             'semester' => $request->semester,
             'phone' => $request->phone,
@@ -49,6 +54,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        $user->notify(new WelcomeStudentNotification());
 
         Auth::login($user);
 

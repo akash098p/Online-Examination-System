@@ -1,0 +1,486 @@
+Folder PATH listing for volume New Volume
+Volume serial number is 000000BA 2ECE:0835
+E:.
+|   .editorconfig
+|   .env
+|   .env.example
+|   .gitattributes
+|   .gitignore
+|   artisan
+|   composer.json
+|   composer.lock
+|   package-lock.json
+|   package.json
+|   phpunit.xml
+|   postcss.config.js
+|   PROJECT_STRUCTURE.md
+|   README.md
+|   start-dev.bat
+|   structure.txt
+|   tailwind.config.js
+|   vite.config.js
+|   
++---app
+|   +---Http
+|   |   +---Controllers
+|   |   |   |   Controller.php
+|   |   |   |   DemoTestController.php
+|   |   |   |   ProfileController.php
+|   |   |   |   
+|   |   |   +---Admin
+|   |   |   |       AiQuestionController.php
+|   |   |   |       DashboardController.php
+|   |   |   |       ExamAnalysisController.php
+|   |   |   |       ExamController.php
+|   |   |   |       ExamReportController.php
+|   |   |   |       OptionController.php
+|   |   |   |       QuestionController.php
+|   |   |   |       ResultController.php
+|   |   |   |       StudentController.php
+|   |   |   |       ViolationController.php
+|   |   |   |       
+|   |   |   +---Auth
+|   |   |   |       AuthenticatedSessionController.php
+|   |   |   |       ConfirmablePasswordController.php
+|   |   |   |       EmailVerificationNotificationController.php
+|   |   |   |       EmailVerificationPromptController.php
+|   |   |   |       NewPasswordController.php
+|   |   |   |       PasswordController.php
+|   |   |   |       PasswordResetLinkController.php
+|   |   |   |       RegisteredUserController.php
+|   |   |   |       VerifyEmailController.php
+|   |   |   |       
+|   |   |   \---Student
+|   |   |           AiResultController.php
+|   |   |           DashboardController.php
+|   |   |           ExamController.php
+|   |   |           ResultController.php
+|   |   |           ViolationController.php
+|   |   |           
+|   |   +---Middleware
+|   |   |       RoleMiddleware.php
+|   |   |       
+|   |   \---Requests
+|   |       |   ProfileUpdateRequest.php
+|   |       |   
+|   |       \---Auth
+|   |               LoginRequest.php
+|   |               
+|   +---Models
+|   |       AiChatMessage.php
+|   |       AiGeneratedQuestion.php
+|   |       AiResultAnalysis.php
+|   |       Exam.php
+|   |       ExamAttempt.php
+|   |       Option.php
+|   |       Question.php
+|   |       Response.php
+|   |       Result.php
+|   |       StudentProfileChangeRequest.php
+|   |       User.php
+|   |       Violation.php
+|   |       
+|   +---Notifications
+|   |       CustomResetPassword.php
+|   |       WelcomeStudentNotification.php
+|   |       
+|   +---Providers
+|   |       AppServiceProvider.php
+|   |       
+|   +---Services
+|   |       CloudinaryProfilePhotoService.php
+|   |       CloudinaryViolationImageService.php
+|   |       GeminiAiService.php
+|   |       
+|   \---View
+|       \---Components
+|               AppLayout.php
+|               GuestLayout.php
+|               
++---bootstrap
+|   |   app.php
+|   |   providers.php
+|   |   
+|   \---cache
+|           .gitignore
+|           packages.php
+|           services.php
+|           
++---config
+|       academix.php
+|       app.php
+|       auth.php
+|       cache.php
+|       database.php
+|       filesystems.php
+|       logging.php
+|       mail.php
+|       queue.php
+|       services.php
+|       session.php
+|       
++---database
+|   |   .gitignore
+|   |   database.sqlite
+|   |   
+|   +---factories
+|   |       UserFactory.php
+|   |       
+|   +---migrations
+|   |       0001_01_01_000000_create_users_table.php
+|   |       0001_01_01_000001_create_cache_table.php
+|   |       0001_01_01_000002_create_jobs_table.php
+|   |       2025_11_26_120155_add_role_to_users_table.php
+|   |       2025_11_26_140203_create_exams_table.php
+|   |       2025_11_26_140432_create_questions_table.php
+|   |       2025_11_26_140707_create_options_table.php
+|   |       2025_11_26_140846_create_exam_user_table.php
+|   |       2025_11_26_141113_create_responses_table.php
+|   |       2025_11_26_141413_create_results_table.php
+|   |       2025_11_30_064952_add_negative_marking_to_exams_table.php
+|   |       2025_11_30_090013_create_exam_attempts_table.php
+|   |       2025_11_30_125441_add_order_index_to_options_table.php
+|   |       2025_11_30_130118_add_negative_to_exams_table.php
+|   |       2026_01_23_112528_add_student_academic_fields_to_users_table.php
+|   |       2026_01_23_123806_add_sex_to_users_table.php
+|   |       2026_01_26_100654_add_is_blocked_to_users_table.php
+|   |       2026_02_05_183322_add_statistics_to_results_table.php
+|   |       2026_03_01_144538_modify_obtained_marks_in_results_table.php
+|   |       2026_03_06_183000_add_pass_percentage_to_exams_table.php
+|   |       2026_03_15_220000_add_deleted_at_to_users_table.php
+|   |       2026_03_25_190000_add_ai_fields_to_questions_table.php
+|   |       2026_03_25_190100_create_ai_generated_questions_table.php
+|   |       2026_03_25_190200_create_ai_result_analyses_table.php
+|   |       2026_03_25_190300_create_ai_chat_messages_table.php
+|   |       2026_04_02_000000_add_semester_to_exams_table.php
+|   |       2026_04_02_210000_add_profile_photo_public_id_to_users_table.php
+|   |       2026_04_03_090000_add_department_to_users_and_exams_tables.php
+|   |       2026_04_03_120000_create_student_profile_change_requests_table.php
+|   |       2026_04_10_120000_add_missing_timestamps_to_ai_generated_questions_table.php
+|   |       2026_04_10_121000_repair_missing_auto_increment_on_primary_ids.php
+|   |       2026_04_28_120000_add_proctoring_fields_to_exams_table.php
+|   |       2026_04_28_121000_create_violations_table.php
+|   |       2026_05_05_120000_add_image_public_id_to_violations_table.php
+|   |       
+|   \---seeders
+|           AdminUserSeeder.php
+|           DatabaseSeeder.php
+|           
++---public
+|   |   .htaccess
+|   |   App-logo.png
+|   |   favicon.ico
+|   |   index.php
+|   |   logo.png
+|   |   robots.txt
+|   |   
+|   +---build
+|   |   |   manifest.json
+|   |   |   
+|   |   \---assets
+|   |           app-BDAkThrR.css
+|   |           app-DhaWEDE0.js
+|   |           
+|   +---images
+|   |       admin-bg.jpg
+|   |       admin-bg34.jpg
+|   |       app-name.png
+|   |       default-female.png
+|   |       default-male.png
+|   |       hero1.jpg
+|   |       hero11.png
+|   |       hero3.jpg
+|   |       nn.png
+|   |       sidebar.jpg
+|   |       
+|   \---storage
+|       |   .gitignore
+|       |   
+|       +---profiles
+|       |       3HdnMpWkujGUVApwlMWURVQBnzoSl9Enzi0xROTo.jpg
+|       |       c0gztEI7IfSR2Siyjlw5eU5gbquPwQYiw5NyA7nn.jpg
+|       |       GxV6eINw05YCUqngpmbLI6zEsag4d6z6kdhyCpoO.jpg
+|       |       k0Trvp2k75dbY176qgbd0mHgODpYKSg5Iu8AucB7.jpg
+|       |       
+|       \---violations
+|           \---exam-41
++---resources
+|   +---css
+|   |       app.css
+|   |       auth-glass.css
+|   |       
+|   +---js
+|   |       app.js
+|   |       auth-toggle.js
+|   |       bootstrap.js
+|   |       
+|   \---views
+|       |   welcome.blade.php
+|       |   
+|       +---admin
+|       |   |   analytics.blade.php
+|       |   |   dashboard.blade.php
+|       |   |   
+|       |   +---analysis
+|       |   |       exams.blade.php
+|       |   |       exam_students.blade.php
+|       |   |       student_result.blade.php
+|       |   |       
+|       |   +---exams
+|       |   |       create.blade.php
+|       |   |       department.blade.php
+|       |   |       edit.blade.php
+|       |   |       index.blade.php
+|       |   |       show.blade.php
+|       |   |       
+|       |   +---profile-requests
+|       |   |       index.blade.php
+|       |   |       
+|       |   +---questions
+|       |   |       create.blade.php
+|       |   |       edit.blade.php
+|       |   |       index.blade.php
+|       |   |       
+|       |   +---results
+|       |   |       exams.blade.php
+|       |   |       sheet.blade.php
+|       |   |       students.blade.php
+|       |   |       
+|       |   +---students
+|       |   |       create.blade.php
+|       |   |       edit.blade.php
+|       |   |       index.blade.php
+|       |   |       show.blade.php
+|       |   |       
+|       |   \---violations
+|       |           exam.blade.php
+|       |           index.blade.php
+|       |           student-overview.blade.php
+|       |           student.blade.php
+|       |           
+|       +---auth
+|       |       confirm-password.blade.php
+|       |       forgot-password.blade.php
+|       |       login.blade.php
+|       |       register.blade.php
+|       |       reset-password.blade.php
+|       |       verify-email.blade.php
+|       |       
+|       +---components
+|       |       app-layout.blade.php
+|       |       application-logo.blade.php
+|       |       auth-session-status.blade.php
+|       |       danger-button.blade.php
+|       |       dropdown-link.blade.php
+|       |       dropdown.blade.php
+|       |       input-error.blade.php
+|       |       input-label.blade.php
+|       |       modal.blade.php
+|       |       nav-link.blade.php
+|       |       primary-button.blade.php
+|       |       responsive-nav-link.blade.php
+|       |       secondary-button.blade.php
+|       |       text-input.blade.php
+|       |       
+|       +---demo
+|       |       index.blade.php
+|       |       result.blade.php
+|       |       start.blade.php
+|       |       
+|       +---emails
+|       |       password-reset.blade.php
+|       |       
+|       +---layouts
+|       |       admin.blade.php
+|       |       guest.blade.php
+|       |       navigation.blade.php
+|       |       
+|       +---profile
+|       |   |   edit.blade.php
+|       |   |   
+|       |   \---partials
+|       |           delete-user-form.blade.php
+|       |           update-password-form.blade.php
+|       |           update-profile-information-form.blade.php
+|       |           
+|       \---student
+|           |   dashboard.blade.php
+|           |   
+|           +---exams
+|           |       index.blade.php
+|           |       result.blade.php
+|           |       start.blade.php
+|           |       terminated.blade.php
+|           |       
+|           \---results
+|                   index.blade.php
+|                   locked.blade.php
+|                   show.blade.php
+|                   
++---routes
+|       admin.php
+|       auth.php
+|       console.php
+|       student.php
+|       web.php
+|       
++---scripts
+|       normalize_ai_options.php
+|       
++---storage
+|   +---app
+|   |   |   .gitignore
+|   |   |   
+|   |   +---private
+|   |   |       .gitignore
+|   |   |       
+|   |   \---public
+|   |       |   .gitignore
+|   |       |   
+|   |       +---profiles
+|   |       |       3HdnMpWkujGUVApwlMWURVQBnzoSl9Enzi0xROTo.jpg
+|   |       |       c0gztEI7IfSR2Siyjlw5eU5gbquPwQYiw5NyA7nn.jpg
+|   |       |       GxV6eINw05YCUqngpmbLI6zEsag4d6z6kdhyCpoO.jpg
+|   |       |       k0Trvp2k75dbY176qgbd0mHgODpYKSg5Iu8AucB7.jpg
+|   |       |       
+|   |       \---violations
+|   |           \---exam-41
+|   +---framework
+|   |   |   .gitignore
+|   |   |   
+|   |   +---cache
+|   |   |   |   .gitignore
+|   |   |   |   
+|   |   |   \---data
+|   |   |           .gitignore
+|   |   |           
+|   |   +---sessions
+|   |   |       .gitignore
+|   |   |       
+|   |   +---testing
+|   |   |       .gitignore
+|   |   |       
+|   |   \---views
+|   |           .gitignore
+|   |           07bb016afe875fcf7c2e7b3ba0375d20.php
+|   |           0bf2a0bc814d75172e80a10159049578.php
+|   |           0d7181bab1a9813bca736b87716d577b.php
+|   |           0f5105b22aac45d83e9112156b2c2f50.php
+|   |           11e374e2394743f8ec5700547c4eb1c6.php
+|   |           12c27731559c24d2c3ef3e263ae1aa16.php
+|   |           19cc5072ddde66678093dc3117e739ff.php
+|   |           1a018d10039c2783826da51c0a1cee1d.php
+|   |           1bf75f45d66334b55d52875e0c4a556a.php
+|   |           25038751ac3db65ca9d5026c8766ea7c.php
+|   |           267cca3f0f3118a2d03946bd5aad3151.php
+|   |           27de1a466364ae0ea848c3b26ea14466.php
+|   |           28187f111b0d231bbb49c0e9b2c437fe.php
+|   |           2c15e3e2ef68dd3d207bbeabba079113.php
+|   |           2fb23cf34f44aac498341d0cc9e737d3.php
+|   |           309265a9260a59aca1126cebe0d3dcd7.php
+|   |           30cc3eb5d03817a80adb9f8fb28346f3.php
+|   |           31e0782118bdd1c07f0f378222d43a8e.php
+|   |           355214dc3a89f621459003fef9c4ab0e.php
+|   |           3c30457a36b916401137a971d51aef55.php
+|   |           3eb78f09d182aa0fca3be6aa76626c64.php
+|   |           3eb9531d09d16e162ef3e3636155a553.php
+|   |           3f0ca1ae1f8c310ff6f3f6d270572192.php
+|   |           40ddf2c1e77294a6bc6b1e73f5d1e437.php
+|   |           45b1eeb019eee878ed6cde2a0cbdb2e0.php
+|   |           45b4b494be1b27f46373ab24b0b36584.php
+|   |           48ef2e07bacb59c2bdcd974faa8ae6cb.php
+|   |           4b65a75df8992459e43224da6fe152f0.php
+|   |           4de14c818f918958770cd2dad258a6c4.php
+|   |           54052fe69f600ba62b3adf9f74299a4f.php
+|   |           54583858a59d6a47b3d66f3ac7a2d430.php
+|   |           59fa3b0536f6be8625a4a8a7a5669b28.php
+|   |           5ac99c58ba3d87516ec694a4500be59f.php
+|   |           5aca19131d9d7e4c6336eaaa7c8648e0.php
+|   |           5c43eee8bf565203776b6c8374c9514b.php
+|   |           5cdafc992f6be852f7691f323951055c.php
+|   |           60ffaf8e6b12432e3a9d0fa5d58ef222.php
+|   |           6167fe8473ed82c4bda469343c993913.php
+|   |           63624ce1753585e2172b5268f7a8f167.php
+|   |           6395594085841d8be04031906b123a98.php
+|   |           67b762edd0170726cf0586a8baf2c2dd.php
+|   |           6ad765fe153d51b30f398bdd1f847d47.php
+|   |           6d32be70e0ecfd8bc50117203c25f3dd.php
+|   |           6db870e4ce61142aec8016987cb5ba33.php
+|   |           6df515ccc71ec1666e102db69b5cb7f6.php
+|   |           6fabab5c9f9b3df14f0b3b2e4c4e8e40.php
+|   |           7432b1ec26932842c7446d39f365087d.php
+|   |           750540164241a2a2f1f058ee4c36918e.php
+|   |           7661d4c3bc05a103ae67a39a2a331687.php
+|   |           795aaf5dc308dd3f4290c5f3648e7d50.php
+|   |           7bfb868121177f7d3a67d67ffdf2e9c4.php
+|   |           80e6f8d2513cfc11680b93e66acd9b81.php
+|   |           82c9c5ac5600f58050863c3c9c698f55.php
+|   |           83f907d3f14a39e6e046376594a4f333.php
+|   |           84eb790804776e5d34dc9028d7f4ef8d.php
+|   |           89d335adc1ebf06a89e4af961311b47b.php
+|   |           8ba08c0bd0acba1111d8da05161aa6ed.php
+|   |           8c9beb8e10dd56e17569f4c91d62b1c9.php
+|   |           8f12abfea7808ed5d0a3b2e532322433.php
+|   |           91c1f769ce54d75c6b8dd1ed1b547204.php
+|   |           9788ae1acb0bdbba5da1abf6bbd58249.php
+|   |           9956040e0d2124b28180ee5545159006.php
+|   |           9fd4a2c86f6908f97e72b840ce2b9d82.php
+|   |           a113c8828bfd339d2a2ce93cc0a10dd6.php
+|   |           a8837edc801b7dbe42007e18eafebb96.php
+|   |           a9994a32a431451ab413340fcc907868.php
+|   |           a9b50a544c963d2e245d7b19f7da0896.php
+|   |           aa84e51af24b5846526af105f29ff41b.php
+|   |           abca00ca444b4f794831748bc4113a03.php
+|   |           addb73327d64e35a297c15cd77a49204.php
+|   |           ae2b0d391f1bd721d26a1456bc61c0de.php
+|   |           b089dfd8ac86dadaeeeef2e66a39ce09.php
+|   |           b68b5b650d2334aac3807533f1f5c2ab.php
+|   |           b8fdba5e51e0f22f215066962a02b35f.php
+|   |           ba431b151bd4e11d3f7ad3591f37e320.php
+|   |           bac5fc5d23d01a23f08c7cc5a65eec46.php
+|   |           bb6e7043d66c50c9457a1e0303c4790d.php
+|   |           bbd3607e4c4efeb22ee7cb927ad69d57.php
+|   |           bf4a5355fb59e5f61b76601b0db46f2f.php
+|   |           c93bfbb07368c3228ea41c6a909ba01e.php
+|   |           c9549938aab17d710a5e75e9b2991d5d.php
+|   |           cb40929a524d3f63187777c60f66a5ad.php
+|   |           d20044899fb8ccc94de0d5dadef66cde.php
+|   |           d2d21eeec5f910de76dc5737ce8703b5.php
+|   |           d50462a0274072e65a61f3037af09e5b.php
+|   |           d669e47f5c7609edcc213a54c1a55b70.php
+|   |           db0b460c54e951d903555b8ca8675b78.php
+|   |           db527c164bdb58cca032e0b34909e817.php
+|   |           dec51dc7adf66440a6e27c8b3c3c537d.php
+|   |           e281bd5255a0542948144c6f7c7b642c.php
+|   |           e6d78df2102b1f43097c04edaa988148.php
+|   |           e97f1267520853cf3e6cf44a24f09acf.php
+|   |           eae74d3a35914ebf8b1cabd52fd680de.php
+|   |           eca8bffbc7b5759695d8ca610a8e20b1.php
+|   |           ee036bfc69a21e628b975fb653c751dc.php
+|   |           f8360a55b9c5f2b053db76b0f126aab5.php
+|   |           faaf661fa6669c3207c91df06fc8d42d.php
+|   |           fe16ea850fda803985ccdf9b68bd1d15.php
+|   |           
+|   \---logs
+|           .gitignore
+|           laravel.log
+|           
+\---tests
+    |   Pest.php
+    |   TestCase.php
+    |   
+    +---Feature
+    |   |   ExampleTest.php
+    |   |   ProfileTest.php
+    |   |   
+    |   \---Auth
+    |           AuthenticationTest.php
+    |           EmailVerificationTest.php
+    |           PasswordConfirmationTest.php
+    |           PasswordResetTest.php
+    |           PasswordUpdateTest.php
+    |           RegistrationTest.php
+    |           
+    \---Unit
+            ExampleTest.php
+            

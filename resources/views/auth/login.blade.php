@@ -50,9 +50,45 @@ body{
 }
 
 /* LOGO */
-.auth-logo{margin-bottom:18px;}
-.auth-logo img{width:75px;cursor:pointer;transition:.3s ease;}
+.auth-logo{margin-bottom:18px;position:relative;overflow:hidden;display:inline-block;}
+.auth-logo::before{
+    content:"";
+    position:absolute;
+    top:-120%;
+    left:-120%;
+    width:240%;
+    height:240%;
+    background: linear-gradient(60deg, transparent 30%, rgba(255,255,255,0.8) 50%, transparent 70%);
+    transform: translateX(-120%) rotate(60deg);
+    opacity: 0;
+    pointer-events:none;
+    animation: shineSweep 2.8s ease-in-out infinite;
+}
+.auth-logo img{width:75px;cursor:pointer;transition:.3s ease, transform .3s ease;}
 .auth-logo img:hover{transform:scale(1.08);}
+
+.container button:not(.hidden){position:relative;overflow:hidden;background:orangered;color:white;font-size:12px;padding:10px 45px;border:none;border-radius:8px;font-weight:600;margin-top:10px;cursor:pointer;transition:transform .2s ease, background .2s ease;}
+.container button:not(.hidden)::before{
+    content:"";
+    position:absolute;
+    top:-120%;
+    left:-120%;
+    width:240%;
+    height:240%;
+    background: linear-gradient(60deg, transparent 30%, rgba(255,255,255,0.75) 50%, transparent 70%);
+    transform: translateX(-120%) rotate(60deg);
+    opacity: 0;
+    pointer-events:none;
+    animation: shineSweep 2.8s ease-in-out infinite;
+}
+.container button:not(.hidden):hover{transform:translateY(-1px);}
+
+@keyframes shineSweep {
+    0% {transform: translateX(-120%) rotate(60deg);opacity:0;}
+    45% {transform: translateX(-20%) rotate(60deg);opacity:0.75;}
+    55% {transform: translateX(20%) rotate(60deg);opacity:0.75;}
+    100% {transform: translateX(120%) rotate(60deg);opacity:0;}
+}
 
 /* VISIBILITY */
 .container.active .sign-in{transform:translateX(100%);opacity:0;visibility:hidden;pointer-events:none;}
@@ -68,7 +104,7 @@ p,span,a{color:#e5e7eb;}
     transition:color .35s ease, opacity .35s ease;
 }
 
-.forgot-link:hover,
+.forgot-link:hover, 
 .forgot-link:focus-visible{
     color:#ef4444;
     opacity:.92;
@@ -105,7 +141,7 @@ p,span,a{color:#e5e7eb;}
 
 
 .container button{
-    background:#f05121;
+    background:orangered;
     color:white;
     font-size:12px;
     padding:10px 45px;
@@ -118,8 +154,9 @@ p,span,a{color:#e5e7eb;}
 }
 
 .container button.hidden{
-    background:transparent;
-    border:1px solid white;
+    background:#facc15;
+    color:black;
+    border:1px solid #ffffff;
     box-shadow:none;
 }
 
@@ -214,17 +251,25 @@ p,span,a{color:#e5e7eb;}
 <input type="text" name="name" placeholder="Name" required>
 <input type="email" name="email" placeholder="Email" required>
 <input type="text" name="college_name" placeholder="College Name" required>
+<select name="department" required>
+    <option value="">Select Department</option>
+    @foreach(config('academix.departments', []) as $department)
+        <option value="{{ $department }}" {{ old('department') === $department ? 'selected' : '' }}>{{ $department }}</option>
+    @endforeach
+</select>
+<select name="sex" required>
+    <option value="">Select Sex</option>
+    <option value="male" {{ old('sex') === 'male' ? 'selected' : '' }}>Male</option>
+    <option value="female" {{ old('sex') === 'female' ? 'selected' : '' }}>Female</option>
+</select>
 <input type="text" name="registration_no" placeholder="Registration Number" required>
 
 <!-- ✅ SEMESTER FIXED -->
 <select name="semester" required>
     <option value="">Select Semester</option>
-    <option value="1st">1st</option>
-    <option value="2nd">2nd</option>
-    <option value="3rd">3rd</option>
-    <option value="4th">4th</option>
-    <option value="5th">5th</option>
-    <option value="6th">6th</option>
+    @foreach(config('academix.semesters', []) as $semester)
+        <option value="{{ $semester }}" {{ old('semester') === $semester ? 'selected' : '' }}>{{ $semester }}</option>
+    @endforeach
 </select>
 
 <input type="text" name="phone" placeholder="Contact Number" required>
@@ -267,7 +312,7 @@ p,span,a{color:#e5e7eb;}
 <a href="/" class="auth-logo">
 <img src="{{ asset('logo.png' ) }}" style="width:160px; height:160px;">
 </a>
-<h1>Welcome Back</h1> <br><br>
+<h1>Welcome Back !</h1> <br><br>
 <p>Sign in with your Email and Password</p><br>
 <button type="button" class="hidden" id="login">Sign In</button>
 </div>
@@ -276,7 +321,7 @@ p,span,a{color:#e5e7eb;}
 <a href="/" class="auth-logo">
 <img src="{{ asset('logo.png') }}" style="width:160px; height:160px;">
 </a>
-<h1>Hello, Students!</h1>
+<h1>Hello, Students !</h1>
 <p>Join<br>Academix,<br>Online Examination System</p>
 <button type="button" class="hidden" id="register">Sign Up</button>
 </div>

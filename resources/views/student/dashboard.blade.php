@@ -6,7 +6,7 @@
 
     <div class="dashboard-page min-h-screen py-8 sm:py-10">
         <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:px-8">
-            <section class="dashboard-hero overflow-hidden rounded-[28px] border border-white/10">
+            <section class="order-1 dashboard-hero overflow-hidden rounded-[28px] border border-white/10">
                 <div class="px-6 py-8 sm:px-8 lg:px-10 lg:py-9">
                     <div class="space-y-5 dashboard-reveal dashboard-reveal-delay-1">
                         <div class="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.24)] dashboard-shimmer">
@@ -22,7 +22,7 @@
                             </h1>
                         </div>
 
-                        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
                             <article class="dashboard-stat dashboard-stat-total dashboard-reveal dashboard-reveal-delay-2">
                                 <span class="dashboard-stat-label dashboard-stat-label-gold">Total exams</span>
                                 <strong class="dashboard-stat-value dashboard-stat-value-total counter" data-value="{{ $totalExams }}">0</strong>
@@ -51,7 +51,7 @@
                 </div>
             </section>
 
-            <section class="dashboard-panel p-5 sm:p-7 dashboard-reveal dashboard-reveal-delay-2">
+            <section class="order-3 md:order-2 dashboard-panel p-5 sm:p-7 dashboard-reveal dashboard-reveal-delay-2">
                 <div class="flex flex-col gap-3 border-b border-white/10 pb-5 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                         <p class="text-xs font-semibold uppercase tracking-[0.24em] text-amber-100/80">Exam Feed</p>
@@ -63,33 +63,33 @@
                 </div>
 
                 @if($nextExams->count())
-                    <div class="dashboard-slider auto-scroll mt-6 flex gap-4 overflow-x-auto pb-2 scroll-smooth" style="scrollbar-width: thin;">
+                    <div class="dashboard-slider auto-scroll mt-6 flex gap-4 overflow-x-auto overflow-y-hidden pb-2 scroll-smooth" style="scrollbar-width: thin;">
                         @foreach($nextExams as $exam)
-                            <article class="dashboard-exam-card min-w-[300px] max-w-[300px] dashboard-reveal dashboard-reveal-delay-3">
-                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-amber-100/80">Scheduled Exam</p>
-                                <h3 class="mt-3 text-xl font-semibold text-white">{{ $exam->title }}</h3>
+                            <article class="dashboard-exam-card dashboard-upcoming-card dashboard-reveal dashboard-reveal-delay-3">
+                                <p class="dashboard-feed-label text-xs font-semibold uppercase tracking-[0.22em] text-amber-100/80">Scheduled Exam</p>
+                                <h3 class="dashboard-feed-title mt-3 text-xl font-semibold text-white">{{ $exam->title }}</h3>
 
-                                <div class="mt-5 space-y-2 text-sm text-slate-200/90">
+                                <div class="dashboard-feed-meta mt-5 space-y-2 text-sm text-slate-200/90">
                                     <p>{{ \Carbon\Carbon::parse($exam->start_time)->format('d M Y, h:i A') }}</p>
                                     <p>{{ $exam->duration_minutes }} mins duration</p>
                                     <p>{{ $exam->questions_count }} questions</p>
                                 </div>
 
                                 <a href="{{ route('student.exams.start', $exam->id) }}"
-                                   class="mt-5 inline-flex items-center justify-center rounded-xl bg-cyan-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400">
+                                   class="dashboard-feed-action mt-5 inline-flex items-center justify-center rounded-xl bg-cyan-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400">
                                     Start Exam
                                 </a>
                             </article>
                         @endforeach
                     </div>
                 @else
-                    <div class="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-6 text-sm text-slate-300">
+                    <div class="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-6 text-sm text-slate-200">
                         No upcoming exams are scheduled right now.
                     </div>
                 @endif
             </section>
 
-            <div class="grid gap-6 xl:grid-cols-2">
+            <div class="order-4 grid gap-6 xl:grid-cols-2">
                 <section class="dashboard-panel p-5 sm:p-7 dashboard-reveal dashboard-reveal-delay-3">
                     <div class="border-b border-white/10 pb-5">
                         <p class="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200">Quick Access</p>
@@ -107,7 +107,7 @@
                         </a>
                         <a href="{{ route('profile.edit') }}" class="dashboard-action-card">
                             <span class="dashboard-action-title">Update Profile</span>
-                            <span class="dashboard-action-copy">Keep identity, contact, and academic details current.</span>
+                            <span class="dashboard-action-copy">Keep identity, contact and academic details current.</span>
                         </a>
                         <a href="{{ route('profile.edit') }}" class="dashboard-action-card">
                             <span class="dashboard-action-title">Security Settings</span>
@@ -138,6 +138,62 @@
                     </div>
                 </section>
             </div>
+            
+            {{-- 🏆 LEADERBOARD --}}
+            <section class="order-2 md:order-3 dashboard-panel p-5 sm:p-7 dashboard-reveal dashboard-reveal-delay-4">
+                <div class="border-b border-white/10 pb-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.24em] text-amber-100/80">Leaderboard</p>
+                        <h3 class="mt-2 text-2xl font-semibold text-white">Top Performers</h3>
+                    <p class="mt-2 text-sm text-slate-400">
+                        {{ $user->department ?? 'All Departments' }} | {{ $user->semester ?? 'All Semesters' }}
+                    </p>
+                </div>
+
+    <div class="mt-6 space-y-4">
+        @foreach ($topStudents as $index => $row)
+
+        <div class="flex items-center justify-between dashboard-stat leaderboard-card">
+
+            {{-- LEFT --}}
+            <div class="flex items-center gap-3">
+
+                {{-- Rank --}}
+                <div class="text-lg font-bold w-8
+                    @if($loop->first) text-yellow-300
+                    @elseif($loop->iteration == 2) text-gray-300
+                    @elseif($loop->iteration == 3) text-orange-300
+                    @endif
+                ">
+                    @if($loop->first) 🥇
+                    @elseif($loop->iteration == 2) 🥈
+                    @elseif($loop->iteration == 3) 🥉
+                    @else #{{ $index + 1 }}
+                    @endif
+                </div>
+
+                {{-- Profile --}}
+                <img 
+                    src="{{ $row->user->profilePhotoUrl() }}" 
+                    class="w-10 h-10 rounded-full object-cover border border-white/20"
+                >
+
+                {{-- Name --}}
+                <span class="text-white font-semibold">
+                    {{ $row->user->name }}
+                </span>
+            </div>
+
+            {{-- RIGHT --}}
+            <div class="text-green-400 font-bold text-lg">
+                {{ number_format($row->avg_percentage, 2) }}%
+            </div>
+
+        </div>
+
+        @endforeach
+    </div>
+</section>
+            
         </div>
     </div>
 
@@ -150,20 +206,20 @@
             position: relative;
             background:
                 linear-gradient(135deg, rgba(10, 16, 30, 0.78), rgba(15, 23, 42, 0.58)),
-                linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+                linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.04));
             backdrop-filter: blur(12px) saturate(125%);
             -webkit-backdrop-filter: blur(12px) saturate(125%);
             box-shadow:
                 inset 0 1px 0 rgba(255, 255, 255, 0.18),
                 inset 0 -1px 0 rgba(255, 255, 255, 0.06),
-                0 28px 70px rgba(2, 6, 23, 0.4);
+                0 28px 70px rgba(2, 6, 23, 0.45);
         }
 
         .dashboard-hero::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.08) 40%, transparent 58%);
+            background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.16) 40%, transparent 58%);
             transform: translateX(-120%);
             animation: dashboardHeroSweep 8s ease-in-out infinite;
             pointer-events: none;
@@ -172,16 +228,17 @@
         .dashboard-panel,
         .dashboard-sidecard {
             position: relative;
+            min-width: 0;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             background:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
-                rgba(15, 23, 42, 0.48);
+                linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06)),
+                rgba(15, 23, 42, 0.70);
             backdrop-filter: blur(10px) saturate(125%);
             -webkit-backdrop-filter: blur(10px) saturate(125%);
             box-shadow:
                 inset 0 1px 0 rgba(255, 255, 255, 0.18),
-                0 20px 50px rgba(2, 6, 23, 0.28);
+                0 20px 50px rgba(2, 6, 23, 0.38);
             border-radius: 24px;
         }
 
@@ -200,11 +257,11 @@
         .dashboard-guidance-card {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             background:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
-                rgba(15, 23, 42, 0.24);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+                linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06)),
+                rgba(15, 23, 42, 0.42);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
             border-radius: 20px;
             padding: 1rem;
             transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
@@ -223,26 +280,26 @@
 
         .dashboard-stat-total {
             background:
-                linear-gradient(180deg, rgba(250, 204, 21, 0.12), rgba(255, 255, 255, 0.03)),
-                rgba(15, 23, 42, 0.24);
+                linear-gradient(180deg, rgba(250, 204, 21, 0.22), rgba(255, 255, 255, 0.06)),
+                rgba(15, 23, 42, 0.42);
         }
 
         .dashboard-stat-upcoming {
             background:
-                linear-gradient(180deg, rgba(56, 189, 248, 0.14), rgba(255, 255, 255, 0.03)),
-                rgba(15, 23, 42, 0.24);
+                linear-gradient(180deg, rgba(56, 189, 248, 0.22), rgba(255, 255, 255, 0.06)),
+                rgba(15, 23, 42, 0.42);
         }
 
         .dashboard-stat-completed {
             background:
-                linear-gradient(180deg, rgba(52, 211, 153, 0.14), rgba(255, 255, 255, 0.03)),
-                rgba(15, 23, 42, 0.24);
+                linear-gradient(180deg, rgba(52, 211, 153, 0.22), rgba(255, 255, 255, 0.06)),
+                rgba(15, 23, 42, 0.42);
         }
 
         .dashboard-stat-score {
             background:
-                linear-gradient(180deg, rgba(244, 114, 182, 0.14), rgba(255, 255, 255, 0.03)),
-                rgba(15, 23, 42, 0.24);
+                linear-gradient(180deg, rgba(244, 114, 182, 0.22), rgba(255, 255, 255, 0.06)),
+                rgba(15, 23, 42, 0.42);
         }
 
         .dashboard-stat-label,
@@ -325,11 +382,42 @@
         }
 
         .dashboard-slider {
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
             scrollbar-color: rgba(255,255,255,0.18) transparent;
+            overscroll-behavior-x: contain;
+        }
+
+        .dashboard-upcoming-card {
+            flex: 0 0 300px;
+            min-width: 300px;
+            max-width: 300px;
+        }
+
+        .dashboard-feed-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+        }
+
+        .dashboard-feed-title {
+            font-size: 1.08rem;
+            line-height: 1.35;
+        }
+
+        .dashboard-feed-meta {
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+
+        .dashboard-feed-action {
+            padding: 0.65rem 1rem;
+            font-size: 0.88rem;
         }
 
         .dashboard-exam-card h3 {
             text-wrap: balance;
+            word-break: break-word;
         }
 
         .dashboard-reveal {
@@ -406,15 +494,118 @@
         }
 
         @media (max-width: 640px) {
-            .dashboard-stat-value {
-                font-size: 1.5rem;
+            .dashboard-page {
+                overflow-x: hidden;
             }
 
-            .dashboard-exam-card {
-                min-width: 270px;
-                max-width: 270px;
+            .dashboard-stat-value {
+                margin-top: 0.55rem;
+                font-size: 1.35rem;
+            }
+
+            .dashboard-stat {
+                padding: 0.9rem;
+            }
+
+            .dashboard-stat-label {
+                font-size: 0.62rem;
+                letter-spacing: 0.16em;
+            }
+
+            .dashboard-stat-empty {
+                font-size: 0.95rem;
+            }
+
+            .dashboard-slider {
+                display: grid;
+                gap: 0.9rem;
+                overflow-x: hidden;
+                overflow-y: visible;
+                padding-bottom: 0.35rem;
+                scroll-padding-inline: 0;
+            }
+
+            .dashboard-upcoming-card {
+                flex: 1 1 auto;
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+                padding: 0.8rem;
+                border-radius: 18px;
+            }
+
+            .dashboard-feed-label {
+                font-size: 0.6rem;
+                letter-spacing: 0.14em;
+            }
+
+            .dashboard-feed-title {
+                margin-top: 0.55rem;
+                font-size: 0.94rem;
+                line-height: 1.28;
+            }
+
+            .dashboard-feed-meta {
+                margin-top: 0.8rem;
+                font-size: 0.78rem;
+                line-height: 1.32;
+            }
+
+            .dashboard-feed-action {
+                margin-top: 0.8rem;
+                padding: 0.5rem 0.85rem;
+                font-size: 0.78rem;
             }
         }
+
+        /* 🏆 Leaderboard Glow Animation */
+.leaderboard-card {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* 🥇 GOLD GLOW */
+.leaderboard-card:nth-child(1) {
+    animation: goldGlow 2.5s ease-in-out infinite alternate;
+    transform: scale(1.03);
+}
+
+/* 🥈 SILVER GLOW */
+.leaderboard-card:nth-child(2) {
+    animation: silverGlow 3s ease-in-out infinite alternate;
+}
+
+/* 🥉 BRONZE GLOW */
+.leaderboard-card:nth-child(3) {
+    animation: bronzeGlow 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes goldGlow {
+    from {
+        box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(250, 204, 21, 0.6);
+    }
+}
+
+@keyframes silverGlow {
+    from {
+        box-shadow: 0 0 10px rgba(209, 213, 219, 0.2);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(209, 213, 219, 0.5);
+    }
+}
+
+@keyframes bronzeGlow {
+    from {
+        box-shadow: 0 0 10px rgba(251, 146, 60, 0.2);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(251, 146, 60, 0.5);
+    }
+}
     </style>
 
     <script>

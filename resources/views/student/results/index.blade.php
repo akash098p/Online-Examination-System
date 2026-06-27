@@ -32,7 +32,7 @@
                 </div>
 
                 @if($results->count() === 0)
-                    <div class="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-6 text-sm text-slate-300">
+                    <div class="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-6 text-sm text-slate-200">
                         You have not attempted any exams yet.
                     </div>
                 @else
@@ -52,26 +52,25 @@
                             </thead>
                             <tbody>
                             @foreach($results as $result)
-                                @php
-                                    $responses = \App\Models\Response::where('exam_id', $result->exam_id)->where('user_id', auth()->id())->whereNotNull('option_id')->get()->unique('question_id');
-                                    $totalQuestions = $result->exam->questions->count();
-                                    $attempted = $responses->count();
-                                    $correct = $responses->where('is_correct', 1)->count();
-                                    $wrong = $responses->where('is_correct', 0)->count();
-                                    $notAnswered = max($totalQuestions - $attempted, 0);
-                                @endphp
-
                                 <tr class="border-b border-white/10 transition hover:bg-white/[0.04] last:border-b-0">
-                                    <td class="px-4 py-4 font-semibold text-white">{{ $result->exam->title ?? 'N/A' }}</td>
-                                    <td class="px-4 py-4">{{ $result->created_at->format('d M Y, h:i A') }}</td>
-                                    <td class="px-4 py-4 font-semibold text-emerald-300">{{ $correct }}</td>
-                                    <td class="px-4 py-4 font-semibold text-rose-300">{{ $wrong }}</td>
-                                    <td class="px-4 py-4 font-semibold text-amber-200">{{ $notAnswered }}</td>
-                                    <td class="px-4 py-4">
+                                    <td class="px-4 py-4 font-semibold text-white" data-label="Exam">
+                                        {{ $result->exam->title ?? 'Exam unavailable' }}
+                                    </td>
+                                    <td class="px-4 py-4" data-label="Submitted At">{{ $result->created_at->format('d M Y, h:i A') }}</td>
+                                    <td class="px-4 py-4 font-semibold text-emerald-300" data-label="Correct">{{ $result->correct ?? 0 }}</td>
+                                    <td class="px-4 py-4 font-semibold text-rose-300" data-label="Wrong">{{ $result->wrong ?? 0 }}</td>
+                                    <td class="px-4 py-4 font-semibold text-amber-200" data-label="Not Answered">{{ $result->not_attempted ?? 0 }}</td>
+                                    <td class="px-4 py-4" data-label="Percentage">
                                         <span class="counter" data-value="{{ number_format($result->percentage, 2, '.', '') }}" data-type="percentage">0%</span>
                                     </td>
-                                    <td class="px-4 py-4"><span class="student-badge {{ $result->status === 'Pass' ? 'student-badge-completed' : 'student-badge-ended' }}">{{ $result->status }}</span></td>
-                                    <td class="px-4 py-4"><a href="{{ route('student.results.show', $result->id) }}" class="student-action-btn student-action-secondary">View Result</a></td>
+                                    <td class="px-4 py-4" data-label="Status"><span class="student-badge {{ $result->status === 'Pass' ? 'student-badge-completed' : 'student-badge-ended' }}">{{ $result->status }}</span></td>
+                                    <td class="px-4 py-4" data-label="Action">
+                                        @if($result->exam)
+                                            <a href="{{ route('student.results.show', $result->id) }}" class="student-action-btn student-action-secondary">View Result</a>
+                                        @else
+                                            <span class="student-action-btn student-action-muted opacity-70 cursor-not-allowed">Unavailable</span>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -84,20 +83,20 @@
 
     <style>
         .student-page { position: relative; }
-        .student-hero, .student-panel { position: relative; overflow: hidden; border: 1px solid rgba(200,200,194,0.32); background: rgba(8,10,34,0.42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 20px 50px rgba(2,6,23,0.28); border-radius: 24px; }
-        .student-hero::before, .student-panel::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.14), transparent 34%); pointer-events: none; }
-        .student-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.08) 40%, transparent 58%); transform: translateX(-120%); animation: studentHeroSweep 8s ease-in-out infinite; pointer-events: none; }
+        .student-hero, .student-panel { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.18); background: rgba(8,10,34,0.66); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 20px 50px rgba(2,6,23,0.32); border-radius: 24px; }
+        .student-hero::before, .student-panel::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent 34%); pointer-events: none; }
+        .student-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.16) 40%, transparent 58%); transform: translateX(-120%); animation: studentHeroSweep 8s ease-in-out infinite; pointer-events: none; }
         .student-title { text-shadow: 0 6px 24px rgba(15,23,42,0.34); }
         .student-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 88px; border-radius: 9999px; padding: 0.4rem 0.8rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-        .student-badge-completed { background: rgba(5,150,105,0.26); color: rgb(209 250 229); }
-        .student-badge-ended { background: rgba(220,38,38,0.26); color: rgb(254 202 202); }
+        .student-badge-completed { background: rgba(5,150,105,0.5); color: rgb(225 255 243); }
+        .student-badge-ended { background: rgba(220,38,38,0.5); color: rgb(255 215 215); }
         .student-action-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 0.85rem; padding: 0.6rem 0.95rem; font-size: 0.8rem; font-weight: 600; transition: all 0.25s ease; }
         .student-action-primary { background: rgb(8 145 178); color: rgb(240 249 255); }
         .student-action-primary:hover { background: rgb(14 165 233); }
-        .student-action-secondary { background: rgba(180,83,9,0.3); color: rgb(255 248 220); }
-        .student-action-secondary:hover { background: rgba(217,119,6,0.36); }
-        .student-action-muted { background: rgba(51,65,85,0.42); color: rgb(226 232 240); }
-        .student-action-muted:hover { background: rgba(71,85,105,0.5); }
+        .student-action-secondary { background: rgba(180,83,9,0.55); color: rgb(255 248 220); }
+        .student-action-secondary:hover { background: rgba(217,119,6,0.65); }
+        .student-action-muted { background: rgba(51,65,85,0.56); color: rgb(226 232 240); }
+        .student-action-muted:hover { background: rgba(71,85,105,0.7); }
         .student-reveal { opacity: 0; transform: translateY(22px); animation: studentReveal 0.75s cubic-bezier(0.22,1,0.36,1) forwards; will-change: transform, opacity; }
         .student-reveal-delay-1 { animation-delay: 0.06s; }
         .student-reveal-delay-2 { animation-delay: 0.14s; }
@@ -107,6 +106,18 @@
         @keyframes studentHeroSweep { 0%,100% { transform: translateX(-120%); } 45%,55% { transform: translateX(120%); } }
         @keyframes studentBadgeShimmer { 0%,100% { transform: translateX(-135%); } 48%,60% { transform: translateX(135%); } }
         @media (prefers-reduced-motion: reduce) { .student-hero::after, .student-shimmer::after, .student-reveal { animation: none !important; opacity: 1; transform: none; } }
+
+        @media (max-width: 900px) {
+            .student-panel { padding: 1.25rem; }
+            .student-panel table { border: 0; }
+            .student-panel table thead { display: none; }
+            .student-panel tbody tr { display: block; margin: 0 0 1rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 1.4rem; background: rgba(15,23,42,0.72); }
+            .student-panel tbody tr td { display: flex; justify-content: space-between; gap: 0.75rem; padding: 0.9rem 1rem; text-align: left; white-space: normal; }
+            .student-panel tbody tr td::before { content: attr(data-label); flex: 0 0 35%; color: rgba(148,163,184,0.95); font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.12em; }
+            .student-panel tbody tr td:last-child { padding-top: 0.75rem; }
+            .student-panel tbody tr td .student-action-btn { width: 100%; }
+            .student-panel tbody tr td .student-badge { width: auto; }
+        }
     </style>
 
     <script>

@@ -629,8 +629,10 @@ color:#60a5fa;
 /* ================= FOOTER ================= */
 
 .footer{
-padding:80px 40px 40px;
-border-top:1px solid rgba(255,255,255,.1);
+padding:72px 24px 28px;
+margin-top:40px;
+border-top:1px solid rgba(148,163,184,.16);
+background:linear-gradient(180deg, rgba(15, 23, 42, 0.16) 0%, rgba(2, 6, 23, 0.7) 100%);
 position:relative;
 z-index:2;
 }
@@ -638,56 +640,152 @@ z-index:2;
 .footer-inner{
 max-width:1200px;
 margin:0 auto;
+padding:32px;
+border:1px solid rgba(255,255,255,0.08);
+border-radius:28px;
+background:linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(10, 16, 32, 0.94));
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
+box-shadow:0 24px 60px rgba(0,0,0,0.26);
 }
 
 .footer-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:40px;
-margin-bottom:50px;
+grid-template-columns:minmax(0,1.2fr) repeat(3,minmax(0,0.8fr));
+gap:32px;
+margin-bottom:32px;
 }
 
 .footer-col h4{
 font-weight:700;
-margin-bottom:20px;
-font-size:18px;
+margin-bottom:16px;
+font-size:1.02rem;
 color:white;
 }
 
 .footer-col p{
-color:#94a3b8;
-line-height:1.7;
-font-size:15px;
+color:#b8c4d8;
+line-height:1.75;
+font-size:0.96rem;
+max-width:34ch;
 }
 
 .footer-links{
 list-style:none;
 padding:0;
 margin:0;
+display:grid;
+gap:12px;
 }
 
 .footer-links li{
-margin-bottom:12px;
+margin-bottom:0;
 }
 
 .footer-links a{
-color:#94a3b8;
+color:#b8c4d8;
 text-decoration:none;
-transition:0.3s;
-font-size:15px;
+transition:0.25s ease;
+font-size:0.95rem;
+display:inline-flex;
+align-items:center;
+gap:10px;
 }
 
 .footer-links a:hover{
-color:#3b82f6;
-padding-left:5px;
+color:#67e8f9;
+transform:translateX(4px);
 }
 
 .footer-bottom{
-text-align:center;
-padding-top:30px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:18px;
+padding-top:24px;
 border-top:1px solid rgba(255,255,255,.08);
-color:#64748b;
-font-size:14px;
+color:#94a3b8;
+font-size:0.92rem;
+flex-wrap:wrap;
+background:transparent !important;
+text-align:left;
+}
+
+.footer-bottom p{
+margin:0;
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+gap:10px 0;
+color:#94a3b8;
+}
+
+.footer-bottom p a{
+color:#cbd5e1 !important;
+text-decoration:none !important;
+margin:0 12px !important;
+transition:color 0.25s ease;
+}
+
+.footer-bottom p a:hover{
+color:#67e8f9 !important;
+}
+
+.footer-brand{
+display:grid;
+gap:14px;
+}
+
+.footer-brand-mark{
+display:inline-flex;
+align-items:center;
+gap:10px;
+font-size:1.4rem;
+font-weight:800;
+color:#fff;
+letter-spacing:-0.02em;
+}
+
+.footer-brand-badge{
+width:40px;
+height:40px;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+background:linear-gradient(135deg, rgba(34,197,94,0.2), rgba(6,182,212,0.22));
+border:1px solid rgba(103,232,249,0.22);
+color:#a5f3fc;
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.footer-brand-copy{
+font-size:0.95rem;
+color:#b8c4d8;
+max-width:40ch;
+}
+
+.footer-bottom-links{
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+gap:10px 18px;
+}
+
+.footer-bottom-links a{
+color:#cbd5e1;
+text-decoration:none;
+transition:color 0.25s ease;
+}
+
+.footer-bottom-links a:hover{
+color:#67e8f9;
+}
+
+.footer-divider{
+width:1px;
+height:14px;
+background:rgba(148,163,184,0.4);
 }
 
 
@@ -715,7 +813,12 @@ padding:15px 20px;
 margin-left:20px;
 font-size:14px;
 }
+.hero{
+align-items:flex-start;
+padding-top:50px;
+}
 .hero-glass{
+width:95%;
 padding:50px 30px;
 }
 .hero-glass h1{
@@ -724,15 +827,62 @@ font-size:42px;
 .hero-glass .subtitle{
 font-size:16px;
 }
+.hero-glass .btn{
+padding:8px 18px;
+font-size:13px;
+white-space:nowrap;
+}
 .section-title{
 font-size:32px;
 }
 .btn-demo{
-margin-left:0;
-margin-top:15px;
+margin-left:8px;
+margin-top:0;
 }
 .grid-2{
 grid-template-columns:1fr;
+}
+
+.footer{
+padding:56px 16px 24px;
+}
+
+.footer-inner{
+padding:24px 18px;
+border-radius:24px;
+}
+
+.footer-grid{
+grid-template-columns:1fr;
+gap:28px;
+margin-bottom:24px;
+}
+
+.footer-col p{
+max-width:none;
+}
+
+.footer-bottom{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.footer-bottom p{
+display:block;
+line-height:1.8;
+}
+
+.footer-bottom p a{
+display:inline-block;
+margin:0 10px 0 0 !important;
+}
+
+.footer-bottom-links{
+gap:10px 14px;
+}
+
+.footer-divider{
+display:none;
 }
 }
 
@@ -782,7 +932,7 @@ style="
 <div class="hero-glass">
 <h1>Welcome to Academix</h1> 
 <p class="subtitle">
-Enterprise-grade platform for secure online exams, instant auto-grading, real-time analytics, and comprehensive institutional management.
+A secure online examination platform with AI-assisted proctoring, instant MCQ evaluation, department-wise exam control and admin analytics built for modern academic workflows.
 </p>
 
 @auth
@@ -805,8 +955,8 @@ Enterprise-grade platform for secure online exams, instant auto-grading, real-ti
 <div class="section-inner">
 <h2 class="section-title">Powerful Platform Features</h2>
 <p class="section-desc">
-Comprehensive examination management system designed for modern educational institutions, 
-with advanced security, automation and analytics capabilities.
+Comprehensive examination management for institutions that need secure delivery,
+automated evaluation, proctoring controls and fast academic oversight from one platform.
 </p>
 
 <div class="grid grid-3">
@@ -816,61 +966,63 @@ with advanced security, automation and analytics capabilities.
 <path d="M12 1L3 5v6c0 5.25 3.75 10.5 9 12 5.25-1.5 9-6.75 9-12V5l-9-4z"/>
 </svg>
 <h3>Advanced Security</h3>
-<p>Multi-layered security with AI-powered proctoring, browser lockdown, live monitoring, 
-and identity verification to ensure exam integrity and prevent cheating.</p>
-</div>
-
-<div class="card">
-<svg class="feature-icon" viewBox="0 0 24 24">
-<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-</svg>
-<h3>Instant Auto-Grading</h3>
-<p>Automatic evaluation with immediate results for objective questions. 
-AI-assisted grading for subjective answers saves hours of manual marking time.</p>
-</div>
-
-<div class="card">
-<svg class="feature-icon" viewBox="0 0 24 24">
-<path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
-</svg>
-<h3>Real-Time Analytics</h3>
-<p>Comprehensive performance insights, detailed reports, candidate tracking, 
-and data-driven analytics to measure learning outcomes effectively.</p>
-</div>
-
-<div class="card">
-<svg class="feature-icon" viewBox="0 0 24 24">
-<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-</svg>
-<h3>Question Bank Management</h3>
-<p>Extensive question library with multiple question types, randomization, 
-difficulty levels, and reusable content for quick exam creation.</p>
-</div>
-
-<div class="card">
-<svg class="feature-icon" viewBox="0 0 24 24">
-<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-</svg>
-<h3>Flexible Delivery</h3>
-<p>Remote and on-premise testing options, mobile compatibility, 
-offline mode support, and scheduled or on-demand exam delivery.</p>
+<p>Protect exam integrity with role-based access, one-attempt control, fullscreen and tab warnings,
+  warning limits and department & semester based eligibility rules.</p>
 </div>
 
 <div class="card">
 <svg class="feature-icon" viewBox="0 0 24 24">
 <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
 </svg>
-<h3>User Management</h3>
-<p>Role-based access control, bulk user import, student/teacher portals, 
-group management, and hierarchical organizational structure.</p>
+<h3>AI Proctoring Workflow</h3>
+<p>Enable camera and microphone checks per exam, detect missing or multiple faces,
+  flag sustained talking, capture screenshot evidence and review violations from the admin panel.</p>
 </div>
+
+<div class="card">
+<svg class="feature-icon" viewBox="0 0 24 24">
+<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+</svg>
+<h3>Instant MCQ Evaluation</h3>
+<p>Automatically grade MCQ exams, publish results quickly and give students answer-level
+  insight with AI-supported result explanations and performance guidance.</p>
+</div>
+
+<div class="card">
+<svg class="feature-icon" viewBox="0 0 24 24">
+<path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+</svg>
+<h3>Real-Time AI Analytics</h3>
+<p>Track exam performance through admin analytics, leaderboards, exam summaries,
+  student-wise result views and AI-generated insights for faster academic review.</p>
+</div>
+
+<div class="card">
+<svg class="feature-icon" viewBox="0 0 24 24">
+<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+</svg>
+<h3>Smart Exam Builder</h3>
+<p>Create exams with reusable questions, option mapping, schedule controls,
+  duration limits and targeted assignment by department and semester.</p>
+</div>
+
+<div class="card">
+<svg class="feature-icon" viewBox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+</svg>
+<h3>Guided Exam Experience</h3>
+<p>Give students a smooth exam flow with a pre-exam checkpoint, camera and microphone readiness test,
+  countdown start, autosave behavior and a live demo test for practice.</p>
+</div>
+
+
 
 </div>
 </div>
 </section>
 
 
-<!-- ================= STATISTICS SECTION ================= -->
+<!-- ================= STATISTICS SECTION =================
 
 <section class="section reveal" style="background:rgba(59,130,246,0.05);padding:80px 20px;">
 <div class="section-inner">
@@ -894,7 +1046,7 @@ group management, and hierarchical organizational structure.</p>
 </div>
 </div>
 </div>
-</section>
+</section>-->
 
 
 <!-- ================= ABOUT SECTION ================= -->
@@ -903,26 +1055,25 @@ group management, and hierarchical organizational structure.</p>
 <div class="section-inner">
 <h2 class="section-title">About Academix</h2>
 <p class="section-desc">
-Academix is a comprehensive online examination management system built with modern technology 
-and designed for educational institutions of all sizes. Our platform combines cutting-edge security, 
-automation and analytics to transform the way institutions conduct assessments.
+Academix is a full online examination management system built for institutions that want
+better control over exam delivery, evaluation, proctoring, and performance review in one place.
 </p>
 <p class="section-desc" style="margin-top:25px;">
-Founded by educators and technologists, we understand the challenges of traditional examination systems. 
-Academix provides a secure, scalable and user-friendly solution that maintains academic integrity 
-while offering flexibility and convenience for both administrators and students.
+Admins can publish department-specific exams, configure per-exam camera and microphone requirements,
+review proctoring evidence, manage students, and analyze outcomes while students attempt exams,
+track scores and review their results from a dedicated dashboard.
 </p>
 
 <div class="grid grid-2" style="margin-top:60px;text-align:left;">
 <div class="card">
 <h3>Our Mission</h3>
-<p>To revolutionize educational assessment by providing institutions with a secure, efficient 
-and intelligent examination platform that enhances learning outcomes and reduces administrative burden.</p>
+<p>To simplify digital assessment through a secure, practical and insight-driven exam platform
+that reduces manual work while improving fairness, visibility and student feedback.</p>
 </div>
 <div class="card">
 <h3>Our Vision</h3>
-<p>To become the global standard for online examination systems, empowering educational institutions 
-with innovative technology that ensures fairness, accessibility and excellence in assessment.</p>
+<p>To help institutions run trustworthy online examinations with modern proctoring,
+clear analytics and a smoother experience for both administrators and learners.</p>
 </div>
 </div>
 </div>
@@ -935,7 +1086,8 @@ with innovative technology that ensures fairness, accessibility and excellence i
 <div class="section-inner">
 <h2 class="section-title">Why Choose Academix?</h2>
 <p class="section-desc">
-Discover the advantages that make Academix the preferred choice for modern educational institutions.
+Designed around real exam operations, Academix combines secure delivery, fast evaluation
+and admin visibility without forcing institutions into disconnected tools.
 </p>
 
 <div class="grid grid-2" style="margin-top:50px;">
@@ -948,8 +1100,8 @@ Discover the advantages that make Academix the preferred choice for modern educa
 </div>
 <div class="benefit-content">
 <h4>Save Time & Resources</h4>
-<p>Automate exam creation, delivery and grading to save hundreds of hours. 
-Reduce paper usage and manual processes with digital workflows.</p>
+<p>Reduce manual checking and repetitive admin work with scheduled exams,
+  automatic MCQ scoring, centralized result sheets and quick student filtering.</p>
 </div>
 </div>
 
@@ -961,8 +1113,8 @@ Reduce paper usage and manual processes with digital workflows.</p>
 </div>
 <div class="benefit-content">
 <h4>Enhanced Security</h4>
-<p>Prevent cheating, browser lockdown, randomized questions
-and comprehensive monitoring systems.</p>
+<p>Restrict exams to eligible students, prevent repeat attempts, enforce timers
+  and add per-exam camera or microphone checks when stronger monitoring is needed.</p>
 </div>
 </div>
 
@@ -974,8 +1126,8 @@ and comprehensive monitoring systems.</p>
 </div>
 <div class="benefit-content">
 <h4>Instant Results</h4>
-<p>Deliver immediate feedback to students with automated grading. 
-Generate detailed performance reports instantly after exam completion.</p>
+<p>Show scores, percentages, answer summaries and AI-assisted feedback soon after submission,
+  so students can understand performance without delay.</p>
 </div>
 </div>
 
@@ -986,9 +1138,9 @@ Generate detailed performance reports instantly after exam completion.</p>
 </svg>
 </div>
 <div class="benefit-content">
-<h4>Seamless Integration</h4>
-<p>Connect with existing LMS platforms, student information systems 
-and other educational tools via API and webhooks.</p>
+<h4>Connected Academic Workflow</h4>
+<p>Keep student profiles, exams, results, analytics, proctoring evidence
+  and AI result support connected inside a single academic platform.</p>
 </div>
 </div>
 
@@ -1000,8 +1152,8 @@ and other educational tools via API and webhooks.</p>
 </div>
 <div class="benefit-content">
 <h4>Scalable Solution</h4>
-<p>Handle thousands of concurrent exam takers without performance issues. 
-Scale from small quizzes to nationwide examinations seamlessly.</p>
+<p>Manage department-wise and semester-wise exams, student records,
+  targeted publishing and admin review as your exam operations grow.</p>
 </div>
 </div>
 
@@ -1013,8 +1165,8 @@ Scale from small quizzes to nationwide examinations seamlessly.</p>
 </div>
 <div class="benefit-content">
 <h4>Comprehensive Reporting</h4>
-<p>Access detailed analytics, performance trends, comparative analysis 
-and customizable reports for data-driven decision making.</p>
+<p>Review answer sheets, performance trends, leaderboard snapshots,
+  violations and exam-level summaries from the admin and student sides.</p>
 </div>
 </div>
 
@@ -1029,8 +1181,8 @@ and customizable reports for data-driven decision making.</p>
 <div class="section-inner">
 <h2 class="section-title">Experience Academix Today</h2>
 <p class="section-desc">
-Try our platform with a live demo test and see how Academix can transform 
-your institution's examination process. No registration required for demo.
+Try the live demo exam flow to experience the timer, palette, answer flow
+and overall student-side test experience before signing in.
 </p>
 <a href="{{ route('demo.index') }}" class="btn btn-demo">Start Free Demo Test</a>
 </div>
@@ -1043,8 +1195,8 @@ your institution's examination process. No registration required for demo.
 <div class="section-inner">
 <h2 class="section-title">Get In Touch</h2>
 <p class="section-desc">
-Have questions? Our team is here to help you get started with Academix. 
-Contact us through any of the channels below.
+Have questions about the platform, exam workflows or admin features?
+Reach out through the contact options below.
 </p>
 
 <div class="contact-grid">
@@ -1054,7 +1206,7 @@ Contact us through any of the channels below.
 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
 </svg>
 <h4>Email Support</h4>
-<p>Get in touch via email for inquiries and support</p>
+<p>Contact the Academix team for platform questions, setup help or project inquiries.</p>
 <a href="mailto:academix.edutech@gmail.com" class="contact-link">academix.edutech@gmail.com</a>
 </div>
 
@@ -1063,7 +1215,7 @@ Contact us through any of the channels below.
 <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z"/>
 </svg>
 <h4>Phone Support</h4>
-<p>Speak directly with our support team</p>
+<p>Speak directly with the team about usage flow, implementation or project support.</p>
 <a href="tel:+1234567890" class="contact-link">+1 (234) 567-890</a>
 </div>
 
@@ -1072,7 +1224,7 @@ Contact us through any of the channels below.
 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
 </svg>
 <h4>Office Location</h4>
-<p>Visit our main office</p>
+<p>Project coordination and institutional communication details.</p>
 <a href="#" class="contact-link">123 Education Lane, Tech City</a>
 </div>
 
@@ -1085,10 +1237,10 @@ Contact us through any of the channels below.
 
 <section id="support" class="section reveal">
 <div class="section-inner">
-<h2 class="section-title">24/7 Customer Support</h2>
+<h2 class="section-title">Platform Guidance</h2>
 <p class="section-desc">
-We're committed to your success. Our dedicated support team is available around the clock 
-to assist you with any questions, technical issues, or guidance you need.
+Explore the parts of Academix that help admins and students work with exams,
+results, proctoring and account management more confidently.
 </p>
 
 <div class="grid grid-3" style="margin-top:50px;">
@@ -1098,15 +1250,17 @@ to assist you with any questions, technical issues, or guidance you need.
 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
 </svg>
 <h3>Knowledge Base</h3>
-<p>Access comprehensive documentation, tutorials, FAQs, and guides to help you make the most of Academix.</p>
+<p>Understand exam creation, publishing rules, result review, student management
+and the exam flow from both admin and student sides.</p>
 </div>
 
 <div class="card">
 <svg class="feature-icon" viewBox="0 0 24 24">
 <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/>
 </svg>
-<h3>Live Chat</h3>
-<p>Connect with our support team instantly through live chat for quick answers to your questions.</p>
+<h3>Admin Review Tools</h3>
+<p>Use built-in dashboards to inspect results, analytics, answer sheets
+and violation evidence without leaving the platform.</p>
 </div>
 
 <div class="card">
@@ -1114,7 +1268,8 @@ to assist you with any questions, technical issues, or guidance you need.
 <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
 </svg>
 <h3>Video Tutorials</h3>
-<p>Watch step-by-step video guides covering everything from basic setup to advanced features.</p>
+<p>Follow the student exam flow, demo experience and admin-side review process
+to get familiar with the platform quickly.</p>
 </div>
 
 </div>
@@ -1133,8 +1288,19 @@ to assist you with any questions, technical issues, or guidance you need.
 <div class="footer-grid">
 
 <div class="footer-col">
+<div class="footer-brand">
+<div class="footer-brand-mark">
+<span class="footer-brand-badge" aria-hidden="true">
+<svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+<path d="M5 18h14M7 15V6.5a1.5 1.5 0 0 1 2.39-1.21L12 7.25l2.61-1.96A1.5 1.5 0 0 1 17 6.5V15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9 10h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+</svg>
+</span>
+<span>Academix</span>
+</div>
 <h4>About Academix</h4>
-<p>Leading online examination platform providing secure, scalable, and intelligent assessment solutions for educational institutions worldwide.</p>
+<p>Academix is an online exam management platform built for secure assessments, proctored exam delivery, result tracking and admin-side academic oversight.</p>
+</div>
 </div>
 
 <div class="footer-col">
@@ -1150,10 +1316,10 @@ to assist you with any questions, technical issues, or guidance you need.
 <div class="footer-col">
 <h4>Resources</h4>
 <ul class="footer-links">
-<li><a href="#">Documentation</a></li>
-<li><a href="#">API Reference</a></li>
-<li><a href="#">Video Tutorials</a></li>
-<li><a href="#">FAQs</a></li>
+<li><a href="#support">User Guide</a></li>
+<li><a href="{{ route('demo.index') }}">Demo Test</a></li>
+<li><a href="#support">Platform Help</a></li>
+<li><a href="#support">FAQs</a></li>
 </ul>
 </div>
 
@@ -1162,15 +1328,16 @@ to assist you with any questions, technical issues, or guidance you need.
 <ul class="footer-links">
 <li><a href="#contact">Contact Us</a></li>
 <li><a href="mailto:academix.edutech@gmail.com">Email Support</a></li>
-<li><a href="#">Help Center</a></li>
-<li><a href="#">System Status</a></li>
+<li><a href="#support">Help</a></li>
+<li><a href="#about">Project Info</a></li>
 </ul>
 </div>
+
 
 </div>
 
 <div class="footer-bottom">
-<p>&copy; {{ date('Y') }} Academix™. All rights reserved. | 
+<p>&copy; {{ date('Y') }} Academix. All rights reserved. | 
 <a href="#" style="color:#64748b;text-decoration:none;margin:0 10px;">Privacy Policy</a> | 
 <a href="#" style="color:#64748b;text-decoration:none;margin:0 10px;">Terms of Service</a> | 
 <a href="#" style="color:#64748b;text-decoration:none;margin:0 10px;">Cookie Policy</a>

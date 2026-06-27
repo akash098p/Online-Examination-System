@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\ResultController;
 use App\Http\Controllers\Admin\ExamReportController;
 use App\Http\Controllers\Admin\ExamAnalysisController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\AiQuestionController;
+use App\Http\Controllers\Admin\ViolationController;
 
 Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')
@@ -21,6 +23,12 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
+        Route::get('/dashboard/profile-change-requests', [DashboardController::class, 'profileChangeRequests'])
+            ->name('profile_requests.index');
+        Route::post('/dashboard/profile-change-requests/{profileRequest}/approve', [DashboardController::class, 'approveProfileChangeRequest'])
+            ->name('profile_requests.approve');
+        Route::post('/dashboard/profile-change-requests/{profileRequest}/reject', [DashboardController::class, 'rejectProfileChangeRequest'])
+            ->name('profile_requests.reject');
 
         Route::get('/analytics', [DashboardController::class, 'analytics'])
             ->name('analytics');
@@ -31,8 +39,19 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::post('exams/{exam}/toggle-publish', [ExamController::class, 'togglePublish'])
             ->name('exams.toggle_publish');
+        Route::get('exams/department/{department}', [ExamController::class, 'department'])
+            ->name('exams.department');
 
         Route::resource('exams', ExamController::class);
+        Route::post('exams/{exam}/ai-questions/generate', [AiQuestionController::class, 'generate'])
+            ->middleware('throttle:ai')
+            ->name('exams.ai_questions.generate');
+        Route::patch('exams/{exam}/ai-questions/{generatedQuestion}', [AiQuestionController::class, 'update'])
+            ->name('exams.ai_questions.update');
+        Route::post('exams/{exam}/ai-questions/{generatedQuestion}/approve', [AiQuestionController::class, 'approve'])
+            ->name('exams.ai_questions.approve');
+        Route::post('exams/{exam}/ai-questions/{generatedQuestion}/reject', [AiQuestionController::class, 'reject'])
+            ->name('exams.ai_questions.reject');
 
         /* ===========================
            QUESTIONS
@@ -84,6 +103,17 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::get('/results/sheet/{result}', [ResultController::class, 'sheet'])
             ->name('results.sheet');
+
+        Route::get('/violations', [ViolationController::class, 'index'])
+            ->name('violations.index');
+        Route::get('/violations/exams/{exam}', [ViolationController::class, 'exam'])
+            ->name('violations.exam');
+        Route::get('/violations/students/{userId}', [ViolationController::class, 'studentOverview'])
+            ->name('violations.student_overview');
+        Route::get('/violations/exams/{exam}/students/{userId}', [ViolationController::class, 'student'])
+            ->name('violations.student');
+        Route::get('/violations/{violation}/image', [ViolationController::class, 'image'])
+            ->name('violations.image');
 
         /* ===========================
            EXAM PERFORMANCE SYSTEM

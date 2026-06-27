@@ -29,7 +29,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button class="!rounded-xl !bg-cyan-500 !px-5 !py-2.5 !text-sm !font-semibold !text-slate-950 hover:!bg-cyan-400 focus:!bg-cyan-400">
+            <x-primary-button class="!rounded-xl !border !border-amber-300 !bg-transparent !px-5 !py-2.5 !text-sm !font-semibold !text-amber-300 transition-all duration-300 hover:!bg-amber-300 hover:!text-slate-950 hover:!shadow-[0_0_16px_rgba(252,211,77,0.95),0_0_36px_rgba(252,211,77,0.75)] focus:!bg-amber-300 focus:!text-slate-950 focus:!shadow-[0_0_16px_rgba(252,211,77,0.95),0_0_36px_rgba(252,211,77,0.75)]">
                 {{ __('Save Password') }}
             </x-primary-button>
 

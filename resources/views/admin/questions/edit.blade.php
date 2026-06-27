@@ -14,6 +14,27 @@
               class="w-full p-2 border rounded mt-1 bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
               required>{{ old('question_text', $question->question_text) }}</textarea>
 
+    <label class="font-semibold mt-3">Topic Tag</label>
+    <input type="text"
+           name="topic"
+           value="{{ old('topic', $question->topic) }}"
+           class="w-full p-2 border rounded mt-1 bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
+           placeholder="Example: Matrices">
+
+    <label class="font-semibold mt-3">Marks</label>
+    <input type="number"
+           name="marks"
+           value="{{ old('marks', $question->marks ?? 1) }}"
+           min="1"
+           class="w-full p-2 border rounded mt-1 bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
+           required>
+
+    <label class="font-semibold mt-3">Explanation</label>
+    <textarea name="explanation"
+              rows="3"
+              class="w-full p-2 border rounded mt-1 bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
+              placeholder="Optional concept explanation shown in result analysis.">{{ old('explanation', $question->explanation) }}</textarea>
+
     {{-- Options --}}
     <h3 class="text-xl font-semibold mt-6 mb-2">Options</h3>
 

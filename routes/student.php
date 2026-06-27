@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\ExamController;
 use App\Http\Controllers\Student\ResultController;
+use App\Http\Controllers\Student\AiResultController;
 
 Route::middleware(['auth', 'role:student'])
     ->prefix('student')
@@ -37,4 +38,10 @@ Route::middleware(['auth', 'role:student'])
 
         Route::get('/results/{result}', [ResultController::class, 'show'])
             ->name('results.show');
+        Route::post('/results/{result}/ai-analysis', [AiResultController::class, 'analyze'])
+            ->middleware('throttle:ai')
+            ->name('results.ai_analysis');
+        Route::post('/results/{result}/ai-chat', [AiResultController::class, 'chat'])
+            ->middleware('throttle:ai')
+            ->name('results.ai_chat');
     });

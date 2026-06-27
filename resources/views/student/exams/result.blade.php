@@ -30,9 +30,6 @@
         $passPercentage = (float) ($exam->pass_percentage ?? 40);
         $passed = $percentage >= $passPercentage;
         $resultBadgeClass = $passed ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700';
-        $resultCardClass = $passed ? 'border-emerald-200 bg-emerald-50' : 'border-rose-200 bg-rose-50';
-        $resultLabelClass = $passed ? 'text-emerald-700' : 'text-rose-700';
-        $resultValueClass = $passed ? 'text-emerald-800' : 'text-rose-800';
         $percentageBadgeClass = $passed ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700';
         $attemptBadgeClass = $isAttempted ?? false;
     @endphp
@@ -41,7 +38,6 @@
         <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <section class="rounded-2xl border border-stone-200 bg-stone-100 shadow-sm">
                 <div class="border-b border-slate-200 px-6 py-6 sm:px-8">
-                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Exam Result</p>
                     <div class="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                         <div>
                             <h1 class="text-2xl font-bold text-slate-900 sm:text-3xl">{{ $exam->title }}</h1>
@@ -54,26 +50,22 @@
                 </div>
 
                 <div class="px-6 py-6 sm:px-8">
-                    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-                        <div class="rounded-xl border border-stone-200 bg-stone-50 p-4">
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+                        <div class="rounded-xl border border-stone-200 bg-stone-50 p-3 sm:p-4">
                             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Total Questions</p>
-                            <p class="mt-3 text-3xl font-bold text-slate-900">{{ $totalQuestions }}</p>
+                            <p class="mt-3 text-2xl font-bold text-slate-900 sm:text-3xl">{{ $totalQuestions }}</p>
                         </div>
-                        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-3 sm:p-4">
                             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">Correct</p>
-                            <p class="mt-3 text-3xl font-bold text-emerald-800">{{ $correct }}</p>
+                            <p class="mt-3 text-2xl font-bold text-emerald-800 sm:text-3xl">{{ $correct }}</p>
                         </div>
-                        <div class="rounded-xl border border-rose-200 bg-rose-50 p-4">
-                            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-rose-700">Wrong</p>
-                            <p class="mt-3 text-3xl font-bold text-rose-800">{{ $wrong }}</p>
-                        </div>
-                        <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                        <div class="rounded-xl border border-amber-200 bg-amber-50 p-3 sm:p-4">
                             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">Not Attempted</p>
-                            <p class="mt-3 text-3xl font-bold text-amber-800">{{ $notAttempted }}</p>
+                            <p class="mt-3 text-2xl font-bold text-amber-800 sm:text-3xl">{{ $notAttempted }}</p>
                         </div>
-                        <div class="rounded-xl border {{ $resultCardClass }} p-4">
-                            <p class="text-xs font-semibold uppercase tracking-[0.18em] {{ $resultLabelClass }}">Result</p>
-                            <p class="mt-3 text-3xl font-bold {{ $resultValueClass }}">{{ $passed ? 'Pass' : 'Fail' }}</p>
+                        <div class="rounded-xl border border-rose-200 bg-rose-50 p-3 sm:p-4">
+                            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-rose-700">Wrong</p>
+                            <p class="mt-3 text-2xl font-bold text-rose-800 sm:text-3xl">{{ $wrong }}</p>
                         </div>
                     </div>
 

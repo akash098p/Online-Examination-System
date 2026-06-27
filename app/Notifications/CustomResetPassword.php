@@ -10,7 +10,7 @@ class CustomResetPassword extends Notification
 {
     use Queueable;
 
-    public function __construct(protected string $token)
+    public function __construct(public string $token)
     {
     }
 

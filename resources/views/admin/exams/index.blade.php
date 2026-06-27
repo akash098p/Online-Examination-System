@@ -1,152 +1,166 @@
 @extends('layouts.admin')
 
-
-
 @section('content')
+<style>
+    .manage-exams-page {
+        position: relative;
+    }
 
-<div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-bold">Manage Exams</h1>
+    .manage-exams-header,
+    .department-summary-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 1.75rem;
+        background:
+            linear-gradient(135deg, rgba(10, 16, 30, 0.78), rgba(15, 23, 42, 0.58)),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.04));
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.18),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+            0 28px 70px rgba(2, 6, 23, 0.42);
+        backdrop-filter: blur(12px) saturate(125%);
+        -webkit-backdrop-filter: blur(12px) saturate(125%);
+    }
 
-    <a href="{{ route('admin.exams.create') }}"
-       class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">
-       + Create Exam
-    </a>
-</div>
+    .manage-exams-header::before,
+    .department-summary-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 34%);
+        pointer-events: none;
+    }
 
-@if(session('success'))
-    <div class="bg-green-600/20 text-green-400 p-3 rounded mb-4">
-        {{ session('success') }}
+    .manage-exams-header::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.16) 40%, transparent 58%);
+        transform: translateX(-120%);
+        animation: manageExamsHeroSweep 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    .department-summary-grid {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .department-summary-card {
+        display: block;
+        padding: 1rem 1.15rem;
+        transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .department-summary-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(255, 255, 255, 0.22);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.18),
+            0 24px 55px rgba(2, 6, 23, 0.38);
+    }
+
+    .department-summary-stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
+        margin-top: 1.5rem;
+    }
+
+    .department-summary-pill {
+        border-radius: 1.15rem;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05)),
+            rgba(15, 23, 42, 0.4);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+        padding: 1rem;
+    }
+
+    .department-summary-pill p {
+        position: relative;
+        z-index: 1;
+    }
+
+    .department-summary-pill::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent 42%);
+        pointer-events: none;
+    }
+
+    @keyframes manageExamsHeroSweep {
+        0%,
+        100% {
+            transform: translateX(-120%);
+        }
+
+        50% {
+            transform: translateX(120%);
+        }
+    }
+
+    @media (min-width: 768px) {
+        .department-summary-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .department-summary-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+</style>
+
+<div class="manage-exams-page space-y-6">
+    <div class="manage-exams-header p-6">
+        <div class="flex justify-between items-center gap-4 flex-wrap">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.26em] text-amber-200">Manage Exams</p>
+                <h1 class="mt-2 text-2xl font-bold text-white">Manage Exams for All Departments</h1>
+                <p class="mt-2 text-sm text-slate-300">Select a department to open its semester-wise exams.</p>
+            </div>
+        </div>
     </div>
-@endif
 
-<form method="GET" action="{{ route('admin.exams.index') }}" class="mb-4 flex flex-wrap items-center gap-3">
-    <input
-        type="text"
-        name="search"
-        value="{{ $search ?? '' }}"
-        placeholder="Search exam by title or subject"
-        class="w-full md:w-80 px-3 py-2 rounded bg-gray-900/80 border border-gray-600 text-gray-100 placeholder:text-gray-400"
-    >
+    @if(session('success'))
+        <div class="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100">
+            {{ session('success') }}
+        </div>
+    @endif
 
-    <select
-        name="status"
-        class="px-3 py-2 rounded bg-gray-900/80 border border-gray-600 text-gray-100"
-    >
-        <option value="all" {{ ($status ?? 'all') === 'all' ? 'selected' : '' }}>All Status</option>
-        <option value="draft" {{ ($status ?? '') === 'draft' ? 'selected' : '' }}>Draft</option>
-        <option value="published" {{ ($status ?? '') === 'published' ? 'selected' : '' }}>Published</option>
-    </select>
+    <section class="department-summary-grid">
+        @foreach($departmentSummaries as $summary)
+            <a
+                href="{{ route('admin.exams.department', $summary['name']) }}"
+                class="department-summary-card"
+            >
+                <div class="flex items-start justify-between gap-3">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">Department</p>
+                        <h2 class="mt-2 text-xl leading-tight font-semibold text-white">{{ $summary['name'] }}</h2>
+                    </div>
+                    <span class="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-amber-100">
+                        View
+                    </span>
+                </div>
 
-    <button type="submit" class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">
-        Apply
-    </button>
-
-    <a href="{{ route('admin.exams.index') }}" class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600 text-white">
-        Reset
-    </a>
-</form>
-
-<div class="bg-gray-800 shadow rounded overflow-hidden">
-    <table class="w-full text-sm">
-        <thead class="bg-gray-700 text-gray-300">
-            <tr>
-                <th class="p-3 text-left">Title</th>
-                <th class="p-3 text-center">Questions</th>
-                <th class="p-3 text-center">Duration</th>
-                <th class="p-3 text-center">Status</th>
-                <th class="p-3 text-center">Actions</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @forelse($exams as $exam)
-                <tr class="border-t border-gray-700 hover:bg-gray-700/40">
-                    <td class="p-3">
-                        <div class="font-semibold">{{ $exam->title }}</div>
-                        <div class="text-sm text-gray-400">{{ $exam->subject }}</div>
-                    </td>
-
-                    <td class="p-3 text-center">
-                        {{ $exam->questions_count ?? $exam->questions->count() }}
-                    </td>
-
-                    <td class="p-3 text-center">
-                        {{ $exam->duration_minutes }} mins
-                    </td>
-
-                    <td class="p-3 text-center">
-                        <span class="px-2 py-1 rounded text-white text-xs
-                            {{ $exam->status === 'published'
-                                ? 'bg-green-600'
-                                : 'bg-yellow-600'
-                            }}">
-                            {{ ucfirst($exam->status) }}
-                        </span>
-                    </td>
-
-                    <td class="p-3">
-                        <div class="flex justify-center gap-2 flex-wrap">
-
-                            {{-- View --}}
-                            <a href="{{ route('admin.exams.show', $exam) }}"
-                               class="admin-action-btn bg-gray-600 hover:bg-gray-500 text-white">
-                               View
-                            </a>
-
-                            {{-- Edit --}}
-                            <a href="{{ route('admin.exams.edit', $exam) }}"
-                               class="admin-action-btn bg-gray-600 hover:bg-gray-500 text-white">
-                               Edit
-                            </a>
-
-                            {{-- Publish / Unpublish --}}
-                            <form action="{{ route('admin.exams.toggle_publish', $exam) }}"
-                                  method="POST"
-                                  class="inline"
-                                  onsubmit="event.preventDefault(); appConfirm('{{ $exam->status === 'published' ? 'Are you sure you want to unpublish this exam?' : 'Are you sure you want to publish this exam?' }}', { title: '{{ $exam->status === 'published' ? 'Unpublish Exam' : 'Publish Exam' }}', confirmText: '{{ $exam->status === 'published' ? 'Unpublish' : 'Publish' }}' }).then(confirmed => { if (confirmed) this.submit(); });">
-                                @csrf
-                                <button class="admin-action-btn text-white
-                                    {{ $exam->status === 'published'
-                                        ? 'bg-yellow-600 hover:bg-yellow-700'
-                                        : 'bg-green-600 hover:bg-green-700'
-                                    }}">
-                                    {{ $exam->status === 'published'
-                                        ? 'Unpublish'
-                                        : 'Publish'
-                                    }}
-                                </button>
-                            </form>
-
-                            {{-- Delete --}}
-                            <form action="{{ route('admin.exams.destroy', $exam) }}"
-                                  method="POST"
-                                  class="inline"
-                                  onsubmit="event.preventDefault(); appConfirm('Are you sure you want to delete this exam?', { title: 'Delete Exam', confirmText: 'Delete' }).then(confirmed => { if (confirmed) this.submit(); });">
-                                @csrf
-                                @method('DELETE')
-                                <button class="admin-action-btn bg-red-600 hover:bg-red-700 text-white">
-                                    Delete
-                                </button>
-                            </form>
-
-                        </div>
-                    </td>
-                </tr>
-
-            @empty
-                <tr>
-                    <td colspan="5" class="p-4 text-center text-gray-400">
-                        No exams found.
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+                <div class="department-summary-stats">
+                    <div class="department-summary-pill">
+                        <p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-slate-400">Total Exams</p>
+                        <p class="mt-2 text-xl font-semibold text-white">{{ $summary['total_exams'] }}</p>
+                    </div>
+                    <div class="department-summary-pill">
+                        <p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-emerald-300">Active Exams</p>
+                        <p class="mt-2 text-xl font-semibold text-emerald-200">{{ $summary['active_exams'] }}</p>
+                    </div>
+                </div>
+            </a>
+        @endforeach
+    </section>
 </div>
-
-{{-- Pagination --}}
-<div class="mt-6">
-    {{ $exams->links() }}
-</div>
-
 @endsection

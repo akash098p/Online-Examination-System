@@ -97,7 +97,7 @@ class DemoTestController extends Controller
 
         if (! $result) {
             return redirect()->route('demo.start', $slug)
-                ->with('error', 'Please submit the demo test first.');
+                ->with('error', 'Please submit the test first.');
         }
 
         return view('demo.result', compact('result'));
@@ -114,7 +114,7 @@ class DemoTestController extends Controller
             'aptitude-basics' => [
                 'slug' => 'aptitude-basics',
                 'title' => 'Test 1: Aptitude Basics',
-                'description' => 'Quick aptitude demo with simple math and reasoning questions.',
+                'description' => 'Quick aptitude test with simple math and reasoning questions.',
                 'duration_minutes' => 10,
                 'questions' => [
                     [
@@ -218,23 +218,23 @@ class DemoTestController extends Controller
                     ],
                     [
                         'id' => 10,
-                        'question_text' => 'Average of 10, 20, 30 is:',
+                        'question_text' => 'Average of 15, 25, 35 is:',
                         'options' => [
                             ['id' => 'a', 'text' => '15'],
                             ['id' => 'b', 'text' => '20'],
                             ['id' => 'c', 'text' => '25'],
                             ['id' => 'd', 'text' => '30'],
                         ],
-                        'correct_option' => 'b',
+                        'correct_option' => 'c',
                     ],
                     [
                         'id' => 11,
-                        'question_text' => 'What is 7 squared?',
+                        'question_text' => 'What is under root of 625?',
                         'options' => [
-                            ['id' => 'a', 'text' => '14'],
-                            ['id' => 'b', 'text' => '42'],
-                            ['id' => 'c', 'text' => '49'],
-                            ['id' => 'd', 'text' => '56'],
+                            ['id' => 'a', 'text' => '35'],
+                            ['id' => 'b', 'text' => '15'],
+                            ['id' => 'c', 'text' => '25'],
+                            ['id' => 'd', 'text' => '55'],
                         ],
                         'correct_option' => 'c',
                     ],
@@ -295,12 +295,12 @@ class DemoTestController extends Controller
                     ],
                     [
                         'id' => 17,
-                        'question_text' => 'If x + 5 = 12, x = ?',
+                        'question_text' => 'If x²+x-6 = 0, x = ?',
                         'options' => [
-                            ['id' => 'a', 'text' => '5'],
-                            ['id' => 'b', 'text' => '6'],
-                            ['id' => 'c', 'text' => '7'],
-                            ['id' => 'd', 'text' => '8'],
+                            ['id' => 'a', 'text' => '2,3'],
+                            ['id' => 'b', 'text' => '-2,3'],
+                            ['id' => 'c', 'text' => '2,-3'],
+                            ['id' => 'd', 'text' => '-2,-3'],
                         ],
                         'correct_option' => 'c',
                     ],
@@ -342,7 +342,7 @@ class DemoTestController extends Controller
             'general-knowledge' => [
                 'slug' => 'general-knowledge',
                 'title' => 'Test 2: General Knowledge',
-                'description' => 'Sample objective questions across geography, science, and current basics.',
+                'description' => 'Sample objective questions across history, geography, science and current basics.',
                 'duration_minutes' => 10,
                 'questions' => [
                     [
@@ -358,12 +358,12 @@ class DemoTestController extends Controller
                     ],
                     [
                         'id' => 2,
-                        'question_text' => 'What is the capital of India?',
+                        'question_text' => 'Who administers the oath of office to the President of India?',
                         'options' => [
-                            ['id' => 'a', 'text' => 'New Delhi'],
-                            ['id' => 'b', 'text' => 'Mumbai'],
-                            ['id' => 'c', 'text' => 'Kolkata'],
-                            ['id' => 'd', 'text' => 'Chennai'],
+                            ['id' => 'a', 'text' => 'Prime Minister'],
+                            ['id' => 'b', 'text' => 'Chief Justice of India'],
+                            ['id' => 'c', 'text' => 'Vice President'],
+                            ['id' => 'd', 'text' => 'Speaker of Lok Sabha'],
                         ],
                         'correct_option' => 'b',
                     ],
@@ -424,12 +424,12 @@ class DemoTestController extends Controller
                     ],
                     [
                         'id' => 8,
-                        'question_text' => 'Which is the largest continent?',
+                        'question_text' => 'Which wind system is responsible for the Indian monsoon?',
                         'options' => [
-                            ['id' => 'a', 'text' => 'Africa'],
-                            ['id' => 'b', 'text' => 'North America'],
-                            ['id' => 'c', 'text' => 'Asia'],
-                            ['id' => 'd', 'text' => 'Europe'],
+                            ['id' => 'a', 'text' => 'Trade winds'],
+                            ['id' => 'b', 'text' => 'Westerlies'],
+                            ['id' => 'c', 'text' => 'Monsoon winds'],
+                            ['id' => 'd', 'text' => 'Polar winds'],
                         ],
                         'correct_option' => 'c',
                     ],
@@ -479,12 +479,12 @@ class DemoTestController extends Controller
                     ],
                     [
                         'id' => 13,
-                        'question_text' => 'Who discovered gravity after observing a falling apple?',
+                        'question_text' => 'Which number is known as Hardy-Ramanujan number?',
                         'options' => [
-                            ['id' => 'a', 'text' => 'Albert Einstein'],
-                            ['id' => 'b', 'text' => 'Isaac Newton'],
-                            ['id' => 'c', 'text' => 'Galileo'],
-                            ['id' => 'd', 'text' => 'Nikola Tesla'],
+                            ['id' => 'a', 'text' => '1001'],
+                            ['id' => 'b', 'text' => '1729'],
+                            ['id' => 'c', 'text' => '999'],
+                            ['id' => 'd', 'text' => '1331'],
                         ],
                         'correct_option' => 'b',
                     ],
@@ -512,12 +512,12 @@ class DemoTestController extends Controller
                     ],
                     [
                         'id' => 16,
-                        'question_text' => 'Which language is primarily spoken in Brazil?',
+                        'question_text' => 'Which institution controls monetary policy in India?',
                         'options' => [
-                            ['id' => 'a', 'text' => 'Spanish'],
-                            ['id' => 'b', 'text' => 'Portuguese'],
-                            ['id' => 'c', 'text' => 'French'],
-                            ['id' => 'd', 'text' => 'English'],
+                            ['id' => 'a', 'text' => 'SEBI'],
+                            ['id' => 'b', 'text' => 'RBI'],
+                            ['id' => 'c', 'text' => 'IMF'],
+                            ['id' => 'd', 'text' => 'Finance Ministry'],
                         ],
                         'correct_option' => 'b',
                     ],

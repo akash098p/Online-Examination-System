@@ -14,6 +14,14 @@ class ResultController extends Controller
     public function index(Request $request)
     {
         $search = trim((string) $request->query('search', ''));
+        $selectedDepartments = $this->normalizeMultiSelectFilter(
+            (array) $request->query('department', []),
+            (array) config('academix.departments', [])
+        );
+        $selectedSemesters = $this->normalizeMultiSelectFilter(
+            (array) $request->query('semester', []),
+            (array) config('academix.semesters', [])
+        );
 
         $examsQuery = Exam::whereHas('results')
             ->withCount('results')
@@ -26,9 +34,17 @@ class ResultController extends Controller
             });
         }
 
+        if (count($selectedDepartments) > 0) {
+            Exam::applyAcademicFieldFilter($examsQuery, 'department', $selectedDepartments);
+        }
+
+        if (count($selectedSemesters) > 0) {
+            Exam::applyAcademicFieldFilter($examsQuery, 'semester', $selectedSemesters);
+        }
+
         $exams = $examsQuery->get();
 
-        return view('admin.results.exams', compact('exams', 'search'));
+        return view('admin.results.exams', compact('exams', 'search', 'selectedDepartments', 'selectedSemesters'));
     }
 
     // 📌 Show students who attempted one exam
@@ -36,9 +52,20 @@ class ResultController extends Controller
     {
         $exam = Exam::findOrFail($examId);
         $filter = strtolower((string) $request->query('filter', 'all'));
+        $department = trim((string) $request->query('department', ''));
+        $semester = trim((string) $request->query('semester', ''));
 
         $resultsQuery = Result::with('user')
-            ->where('exam_id', $exam->id);
+            ->where('exam_id', $exam->id)
+            ->whereHas('user', function ($query) use ($department, $semester) {
+                if ($department !== '') {
+                    $query->where('department', $department);
+                }
+
+                if ($semester !== '') {
+                    $query->where('semester', $semester);
+                }
+            });
 
         switch ($filter) {
             case 'highest':
@@ -63,7 +90,7 @@ class ResultController extends Controller
 
         $results = $resultsQuery->get();
 
-        return view('admin.results.students', compact('exam', 'results', 'filter'));
+        return view('admin.results.students', compact('exam', 'results', 'filter', 'department', 'semester'));
     }
 
     // 📌 Full answer sheet for one student result
@@ -93,5 +120,28 @@ class ResultController extends Controller
             'attempted',
             'notAnswered'
         ));
+    }
+
+    protected function normalizeMultiSelectFilter(array $selectedValues, array $allOptions): array
+    {
+        $selectedValues = array_values(array_unique(array_filter(array_map(function ($value) {
+            return is_string($value) ? trim($value) : $value;
+        }, $selectedValues), fn ($value) => $value !== '' && $value !== null)));
+        $allOptions = array_values(array_unique(array_filter(array_map(function ($value) {
+            return is_string($value) ? trim($value) : $value;
+        }, $allOptions), fn ($value) => $value !== '' && $value !== null)));
+
+        if (count($selectedValues) === 0) {
+            return [];
+        }
+
+        sort($selectedValues);
+        sort($allOptions);
+
+        if ($selectedValues === $allOptions) {
+            return [];
+        }
+
+        return $selectedValues;
     }
 }

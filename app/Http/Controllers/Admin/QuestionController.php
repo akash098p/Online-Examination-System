@@ -17,6 +17,7 @@ class QuestionController extends Controller
     {
         $questions = $exam->questions()
             ->with('options')
+            ->withCount('options')
             ->orderBy('id')
             ->get();
 
@@ -38,6 +39,9 @@ class QuestionController extends Controller
     {
         $request->validate([
             'question_text'   => 'required|string',
+            'topic'           => 'nullable|string|max:255',
+            'explanation'     => 'nullable|string',
+            'marks'           => 'nullable|integer|min:1',
             'options'         => 'required|array|min:2',
             'options.*'       => 'required|string',
             'correct_option'  => 'required|integer',
@@ -46,6 +50,7 @@ class QuestionController extends Controller
         // Create question
         $question = $exam->questions()->create([
             'question_text' => $request->question_text,
+            'topic' => $request->topic,
             'marks' => $request->marks,
             'explanation' => $request->explanation ?? null,
         ]);
@@ -93,6 +98,9 @@ class QuestionController extends Controller
     {
         $request->validate([
             'question_text'   => 'required|string',
+            'topic'           => 'nullable|string|max:255',
+            'explanation'     => 'nullable|string',
+            'marks'           => 'nullable|integer|min:1',
             'options'         => 'required|array|min:2',
             'options.*'       => 'required|string',
             'correct_option'  => 'required|integer',
@@ -101,6 +109,9 @@ class QuestionController extends Controller
         // Update question
         $question->update([
             'question_text' => $request->question_text,
+            'topic' => $request->topic,
+            'marks' => $request->marks ?? $question->marks,
+            'explanation' => $request->explanation,
         ]);
 
         // Remove old options

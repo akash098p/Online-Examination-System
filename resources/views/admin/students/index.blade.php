@@ -6,28 +6,69 @@
 <h1 class="text-3xl font-bold mb-6">🎓 Student Management</h1>
 
 <!-- Top Bar -->
-<div class="flex flex-wrap items-center gap-3 mb-4">
+@php
+    $search = $search ?? request('search');
+    $selectedDepartments = $selectedDepartments ?? array_values(array_filter((array) request('department', []), fn ($value) => $value !== ''));
+    $selectedSemesters = $selectedSemesters ?? array_values(array_filter((array) request('semester', []), fn ($value) => $value !== ''));
+    $departmentLabel = count($selectedDepartments) ? implode(', ', $selectedDepartments) : 'All';
+    $semesterLabel = count($selectedSemesters) ? implode(', ', $selectedSemesters) : 'All';
+@endphp
+<div class="custom-dropdown-group flex flex-wrap items-center gap-3 mb-4" style="overflow: visible; position: relative; z-index: 1;">
 
     <!-- Filter Form -->
-    <form method="GET" class="flex flex-wrap items-center gap-3">
+    <form method="GET" class="custom-dropdown-form flex flex-wrap items-center gap-3" style="overflow: visible; position: relative;">
         <input type="text" name="search" placeholder="Search name, email, reg no"
-        value="{{ request('search') }}"
+        value="{{ $search }}"
         class="p-2 rounded bg-gray-800 border border-gray-700 text-gray-200">
 
-        <select name="semester"
-        class="admin-semester-select p-2 rounded bg-gray-800 border border-gray-700 text-gray-200">
-            <option value="">All semesters</option>
-            <option value="1st" {{ request('semester')=='1st'?'selected':'' }}>1st</option>
-            <option value="2nd" {{ request('semester')=='2nd'?'selected':'' }}>2nd</option>
-            <option value="3rd" {{ request('semester')=='3rd'?'selected':'' }}>3rd</option>
-            <option value="4th" {{ request('semester')=='4th'?'selected':'' }}>4th</option>
-            <option value="5th" {{ request('semester')=='5th'?'selected':'' }}>5th</option>
-            <option value="6th" {{ request('semester')=='6th'?'selected':'' }}>6th</option>
-        </select>
+        <div class="w-full sm:w-auto" style="overflow: visible; position: relative; z-index: 1;">
+            <details class="custom-multi-select compact" style="overflow: visible; z-index: 999;">
+                <summary>
+                    <span class="truncate">{{ $departmentLabel }}</span>
+                    <span class="dropdown-toggle">▾</span>
+                </summary>
+                <div class="multi-select-panel" style="max-height: 16rem; width: 18rem;">
+                    <label class="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 hover:bg-white/5">
+                        <input type="checkbox" name="department[]" value="" {{ count($selectedDepartments) === 0 ? 'checked' : '' }} class="h-4 w-4 rounded-full accent-indigo-500">
+                        <span>All departments</span>
+                    </label>
+                    @foreach(config('academix.departments', []) as $option)
+                        <label class="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 hover:bg-white/5">
+                            <input type="checkbox" name="department[]" value="{{ $option }}" {{ in_array($option, $selectedDepartments, true) ? 'checked' : '' }} class="h-4 w-4 rounded-full accent-indigo-500">
+                            <span>{{ $option }}</span>
+                        </label>
+                    @endforeach
+                </div>
+            </details>
+        </div>
+
+        <div class="w-full sm:w-auto" style="overflow: visible; position: relative; z-index: 1;">
+            <details class="custom-multi-select compact" style="overflow: visible; z-index: 999;">
+                <summary>
+                    <span class="truncate">{{ $semesterLabel }}</span>
+                    <span class="dropdown-toggle">▾</span>
+                </summary>
+                <div class="multi-select-panel" style="max-height: 16rem; width: 15rem;">
+                    <label class="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 hover:bg-white/5">
+                        <input type="checkbox" name="semester[]" value="" {{ count($selectedSemesters) === 0 ? 'checked' : '' }} class="h-4 w-4 rounded-full accent-indigo-500">
+                        <span>All semesters</span>
+                    </label>
+                    @foreach(config('academix.semesters', []) as $option)
+                        <label class="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 hover:bg-white/5">
+                            <input type="checkbox" name="semester[]" value="{{ $option }}" {{ in_array($option, $selectedSemesters, true) ? 'checked' : '' }} class="h-4 w-4 rounded-full accent-indigo-500">
+                            <span>{{ $option }}</span>
+                        </label>
+                    @endforeach
+                </div>
+            </details>
+        </div>
 
         <button class="px-4 py-2 bg-indigo-600 rounded text-white">
             Filter
         </button>
+        <a href="{{ route('admin.students.index') }}" class="px-4 py-2 rounded bg-gray-700 text-white hover:bg-gray-600">
+            Reset
+        </a>
     </form>
 
     <!-- Add Student Button -->
@@ -45,6 +86,7 @@
 <th class="p-3 text-left">Name</th>
 <th class="p-3 text-left">Reg No</th>
 <th class="p-3 text-left">Email</th>
+<th class="p-3 text-left">Department</th>
 <th class="p-3 text-left">Semester</th>
 <th class="p-3 text-left">Status</th>
 <th class="p-3 text-left">Action</th>
@@ -62,6 +104,7 @@
 </td>
 <td class="p-3">{{ $s->registration_no }}</td>
 <td class="p-3">{{ $s->email }}</td>
+<td class="p-3">{{ $s->department ?? 'N/A' }}</td>
 <td class="p-3">{{ $s->semester }}</td>
 
 <td class="p-3">
@@ -82,12 +125,6 @@ class="admin-action-btn bg-blue-600 text-white">
 View
 </a>
 
-<!-- Edit -->
-<a href="{{ route('admin.students.edit',$s->id) }}"
-class="admin-action-btn bg-indigo-600 text-white">
-Edit
-</a>
-
 <!-- Block / Unblock -->
 <form method="POST" action="{{ route('admin.students.toggle',$s->id) }}"
     x-data
@@ -97,18 +134,6 @@ Edit
         {{ $s->trashed() ? 'disabled' : '' }}
         class="admin-action-btn bg-yellow-600 text-white hover:bg-yellow-700 transition">
         Block/Unblock
-    </button>
-</form>
-
-<!-- Delete -->
-<form method="POST" action="{{ route('admin.students.destroy',$s->id) }}"
-    x-data
-    @submit.prevent="appConfirm('{{ $s->trashed() ? 'Restore this student account to app access?' : 'Remove this student from app access? Their database records will stay.' }}', { title: '{{ $s->trashed() ? 'Restore Student' : 'Remove Student' }}', confirmText: '{{ $s->trashed() ? 'Restore' : 'Remove' }}' }).then(confirmed => { if (confirmed) $el.submit(); });">
-    @csrf 
-    @method('DELETE')
-    <button type="submit"
-        class="admin-action-btn bg-red-600 text-white hover:bg-red-700 transition">
-        {{ $s->trashed() ? 'Restore' : 'Delete' }}
     </button>
 </form>
 

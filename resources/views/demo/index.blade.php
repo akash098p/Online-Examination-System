@@ -1,5 +1,9 @@
 <x-app-layout>
 <style>
+.demo-page-shell {
+    width: 100%;
+}
+
 .demo-card {
     position: relative;
     overflow: hidden;
@@ -35,15 +39,29 @@
         transform: translateY(0) scale(1);
     }
 }
+
+@media (max-width: 640px) {
+    .demo-page-shell {
+        max-width: none;
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+        padding-top: 1.25rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .demo-card {
+        padding: 1.1rem;
+    }
+}
 </style>
 
-<div class="max-w-5xl mx-auto px-4 py-8">
+<div class="demo-page-shell max-w-6xl mx-auto px-4 py-8">
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-white">Try Demo Test</h1>
         <p class="text-gray-300 mt-2">Choose any demo test below. You can take each test multiple times.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
         @foreach($tests as $index => $test)
             <div class="demo-card rounded-xl border border-white/20 bg-slate-900/70 p-6 shadow-lg"
                  style="animation-delay: {{ 120 * $index }}ms;">

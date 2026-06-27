@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\StudentProfileChangeRequest;
+use App\Services\CloudinaryProfilePhotoService;
+use RuntimeException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -18,38 +20,69 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'pendingAcademicRequest' => $user->pendingProfileChangeRequest()->first(),
         ]);
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request, CloudinaryProfilePhotoService $profilePhotoService): RedirectResponse
     {
         $user = $request->user();
         $validated = $request->validated();
 
         // Fill normal profile fields (exclude photo controls)
         unset($validated['profile_photo'], $validated['remove_profile_photo']);
+
+        if ($user->role === 'student') {
+            $requestedDepartment = $validated['department'] ?? $user->department;
+            $requestedSemester = $validated['semester'] ?? $user->semester;
+
+            unset($validated['department'], $validated['semester']);
+
+            if ($requestedDepartment !== $user->department || $requestedSemester !== $user->semester) {
+                StudentProfileChangeRequest::updateOrCreate(
+                    [
+                        'user_id' => $user->id,
+                        'status' => 'pending',
+                    ],
+                    [
+                        'current_department' => $user->department,
+                        'requested_department' => $requestedDepartment,
+                        'current_semester' => $user->semester,
+                        'requested_semester' => $requestedSemester,
+                        'reviewed_by' => null,
+                        'reviewed_at' => null,
+                    ]
+                );
+            }
+        }
+
         $user->fill($validated);
 
         // Remove current profile photo and fall back to default avatar
         if ($request->boolean('remove_profile_photo') && $user->profile_photo) {
-            Storage::disk('public')->delete($user->profile_photo);
-            $user->profile_photo = null;
+            $profilePhotoService->deleteFromUser($user);
         }
 
         // Handle profile photo upload
         if ($request->hasFile('profile_photo')) {
+            try {
+                $profilePhotoService->deleteFromUser($user);
 
-            if ($user->profile_photo) {
-                Storage::disk('public')->delete($user->profile_photo);
+                $upload = $profilePhotoService->upload($request->file('profile_photo'), $user);
+                $user->profile_photo = $upload['url'];
+                $user->profile_photo_public_id = $upload['public_id'];
+            } catch (RuntimeException $exception) {
+                return Redirect::route('profile.edit')
+                    ->withInput()
+                    ->withErrors(['profile_photo' => $exception->getMessage()]);
             }
-
-            $path = $request->file('profile_photo')->store('profiles', 'public');
-            $user->profile_photo = $path;
         }
 
         // Reset email verification if email changed

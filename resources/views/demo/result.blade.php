@@ -4,13 +4,32 @@
     $summary = $result['summary'];
 @endphp
 
-<div class="max-w-5xl mx-auto px-4 py-8">
+<style>
+@media (max-width: 640px) {
+    .demo-result-shell {
+        max-width: none;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-top: 1.25rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .demo-result-summary {
+        gap: 0.75rem;
+    }
+
+    .demo-result-summary > div {
+        padding: 0.85rem;
+    }
+}
+</style>
+
+<div class="demo-result-shell max-w-6xl mx-auto px-4 py-8">
     <div class="rounded-xl border border-white/20 bg-slate-900/70 p-6 mb-6">
         <h1 class="text-2xl font-bold text-white">{{ $test['title'] }} - Result</h1>
-        <p class="text-gray-300 mt-1">Instant result generated without database storage.</p>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+    <div class="demo-result-summary grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
         <div class="rounded-lg bg-black/30 border border-white/10 p-4 text-center">
             <p class="text-gray-400 text-sm">Total</p>
             <p class="text-xl font-bold text-white">{{ $summary['total_questions'] }}</p>
@@ -74,11 +93,11 @@
     <div class="mt-6 flex flex-wrap gap-3">
         <a href="{{ route('demo.start', $test['slug']) }}"
            class="rounded-md bg-blue-600 px-5 py-2 font-semibold text-white hover:bg-blue-500 transition">
-            Retake This Demo
+            Retake This Exam
         </a>
         <a href="{{ route('demo.index') }}"
            class="rounded-md bg-gray-700 px-5 py-2 font-semibold text-white hover:bg-gray-600 transition">
-            Try Other Demo
+            Try Other Exams
         </a>
         <a href="{{ route('home') }}"
            class="rounded-md bg-emerald-700 px-5 py-2 font-semibold text-white hover:bg-emerald-600 transition">
@@ -87,4 +106,3 @@
     </div>
 </div>
 </x-app-layout>
-

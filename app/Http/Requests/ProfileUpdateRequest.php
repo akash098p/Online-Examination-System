@@ -27,8 +27,10 @@ class ProfileUpdateRequest extends FormRequest
 
             // ✅ new academic/profile fields
             'college_name' => ['nullable', 'string', 'max:255'],
+            'department' => ['nullable', 'in:'.implode(',', config('academix.departments', []))],
             'registration_no' => ['nullable', 'string', 'max:100'],
-            'semester' => ['nullable', 'string', 'max:50'],
+            'semester' => ['nullable', 'in:'.implode(',', config('academix.semesters', []))],
+            'date_of_birth' => ['nullable', 'date'],
             'phone' => ['nullable', 'string', 'max:20'],
             'sex' => ['nullable', 'in:male,female'],
 

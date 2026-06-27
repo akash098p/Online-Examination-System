@@ -12,8 +12,10 @@ class Question extends Model
     protected $fillable = [
         'exam_id',
         'question_text',
+        'topic',
         'question_type',
         'marks',
+        'explanation',
     ];
 
     // Belongs to exam

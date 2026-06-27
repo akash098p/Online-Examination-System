@@ -56,4 +56,14 @@ class Result extends Model
         return $this->hasMany(\App\Models\Response::class, 'exam_id', 'exam_id')
                     ->where('user_id', $this->user_id);
     }
+
+    public function aiAnalysis()
+    {
+        return $this->hasOne(AiResultAnalysis::class);
+    }
+
+    public function aiChatMessages()
+    {
+        return $this->hasMany(AiChatMessage::class)->orderBy('id');
+    }
 }

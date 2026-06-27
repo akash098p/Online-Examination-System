@@ -15,6 +15,12 @@
               class="w-full p-2 border rounded mt-1 bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
               required></textarea>
 
+    <label class="font-semibold mt-3">Topic Tag</label>
+    <input type="text"
+       name="topic"
+       class="w-full p-2 border rounded mt-1 bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
+       placeholder="Example: Matrices">
+
     <label class="font-semibold mt-3">Marks</label>
     <input type="number"
        name="marks"
@@ -22,6 +28,12 @@
        min="1"
        class="w-full p-2 border rounded mt-1 bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
        required>
+
+    <label class="font-semibold mt-3">Explanation</label>
+    <textarea name="explanation"
+              rows="3"
+              class="w-full p-2 border rounded mt-1 bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
+              placeholder="Optional concept explanation shown in result analysis."></textarea>
          
 
     {{-- Options --}}

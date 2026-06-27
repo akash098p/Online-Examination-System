@@ -35,7 +35,7 @@ class ResultController extends Controller
     {
         $result = Result::where('id', $resultId)
             ->where('user_id', auth()->id())
-            ->with('exam.questions.options')
+            ->with(['exam.questions.options', 'aiAnalysis', 'aiChatMessages'])
             ->firstOrFail();
 
         $exam = $result->exam;
