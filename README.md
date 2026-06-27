@@ -250,7 +250,7 @@ If you want to extend Academix, feel free to add:
 Akash Pramanik
 
 For questions or support: <a href="https://instagram.com/akash.098p" target="_blank">
-  <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=akash.098p&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"/>
 </a>
 
 <a href="mailto:YOUR_EMAIL@gmail.com">
