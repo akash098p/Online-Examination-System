@@ -243,14 +243,14 @@ If you want to extend Academix, feel free to add:
 
 Akash Pramanik
 
-For questions or support: `akashpramanik422@gmail.com`
+For questions or support:
 
 <a href="mailto:akashpramanik422@gmail.com">
 <img src="https://skillicons.dev/icons?i=gmail" height="32"/>
 </a>
-&nbsp;<b>`akashpramanik422@gmail.com`</b> 
-
+&nbsp;<b>akashpramanik422@gmail.com</b> 
+<br>
 <a href="https://instagram.com/akash.098p">
 <img src="https://skillicons.dev/icons?i=instagram" height="32"/>
 </a>
-&nbsp;<b>akash098p</b>
+&nbsp;<b>akash.098p</b>
