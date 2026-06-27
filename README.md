@@ -25,7 +25,7 @@ Academix is a modern online examination system built with Laravel, Tailwind CSS,
   <img src="media/home page.gif" width="90%">
 </p>
 
-### Create New Account or Log in to the Existing Account
+### Log in & Sign up Page
 
 <p align="center">
   <img src="media/auth.jpg" width="100%">
@@ -58,7 +58,7 @@ Academix is a modern online examination system built with Laravel, Tailwind CSS,
   <img src="media/student ai chat.png" width="48%">
 </p>
 
-- Visit the URL : https://academix.free.je
+- 👉 Website URL : https://academix.free.je
 ---
 
 ## 🔥 Key Benefits
@@ -294,4 +294,44 @@ For questions or support: <a href="https://instagram.com/akash.098p" target="_bl
   <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
 </a>
 
+<h3>Akash Pramanik</h3>
 
+<p>
+  <strong>For questions or support:</strong>
+
+  <a href="https://instagram.com/akash.098p" target="_blank">
+    <img src="https://img.shields.io/badge/@akash.098p-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
+  </a>
+
+  <a href="mailto:your_email@gmail.com">
+    <img src="https://img.shields.io/badge/your_email@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
+  </a>
+</p>
+
+<h3>Akash Pramanik</h3>
+
+<p>
+  <strong>For questions or support:</strong>
+
+  <a href="https://instagram.com/akash.098p" target="_blank">
+    <img src="https://img.shields.io/badge/@akash.098p-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
+  </a>
+
+  <a href="mailto:akashpramanik098@gmail.com">
+    <img src="https://img.shields.io/badge/akashpramanik098%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
+  </a>
+</p>
+
+<h2 align="center">Akash Pramanik</h2>
+
+<p align="center">
+  <strong>For questions or support:</strong>
+
+  <a href="https://instagram.com/akash.098p" target="_blank">
+    <img src="https://img.shields.io/badge/@akash.098p-E4405F?style=for-the-badge&logo=instagram&logoColor=white"/>
+  </a>
+
+  <a href="mailto:akashpramanik098@gmail.com">
+    <img src="https://img.shields.io/badge/akashpramanik098%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
+  </a>
+</p>
