@@ -3,7 +3,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-12.x-red?logo=laravel&logoColor=white" alt="Laravel">
   <img src="https://img.shields.io/badge/PHP-8.2+-blue?logo=php&logoColor=white" alt="PHP">
-  <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
   <img src="https://img.shields.io/badge/Status-Active-brightgreen" alt="Active">
 </p>
 
