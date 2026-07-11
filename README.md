@@ -31,7 +31,7 @@ Academix is a modern online examination system built with Laravel, Tailwind CSS,
 </p>
 
 
-### Admin Panel
+### Admin Module
 
 <p align="center">
   <img src="media/admin dashboard.png" width="48%">
@@ -44,7 +44,7 @@ Academix is a modern online examination system built with Laravel, Tailwind CSS,
   <img src="media/admin violation.png" width="48%">
 </p>
 
-### Student Panel
+### Student Module
 
 <p align="center">
   <img src="media/student dashboard.png" width="48%">
