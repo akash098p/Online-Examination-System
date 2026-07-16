@@ -200,6 +200,31 @@ Then open `http://127.0.0.1:8000` in your browser.
 
 ---
 
+## ⚡ Quick Run with a Batch File (Windows)
+
+Instead of opening multiple terminal windows manually to start your backend and frontend compilers, you can automate everything using a batch script.
+
+1. Create a new file named `start-dev.bat` in the root directory of the project (same level as `artisan`).
+2. Paste the following script inside it:
+
+```batch
+@echo off
+title Laravel Dev Server
+echo Starting PHP server...
+start "PHP Server" cmd /k "php artisan serve"
+timeout /t 3 /nobreak >nul
+echo Starting NPM dev server...
+start "NPM Dev" cmd /k "npm run dev"
+timeout /t 2 /nobreak >nul
+echo Opening browser...
+start http://127.0.0.1:8000
+echo All servers started and browser opened! Close this window to stop.
+pause
+```
+Double-click the `start-dev.bat` file. It will automatically spin up the Laravel server, launch the Vite dev environment and open `http://127.0.0.1:8000` inside your browser.
+
+---
+
 ## 🧪 Local Development
 
 For development with auto-reload:
