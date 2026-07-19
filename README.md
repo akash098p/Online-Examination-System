@@ -305,6 +305,11 @@ If you want to extend Academix, feel free to add:
 - advanced AI exam review and grading
 
 ---
+## 🪪 License
+
+This project is released under the [MIT License](LICENSE).
+
+---
 
 ## 📬 Contact
 
